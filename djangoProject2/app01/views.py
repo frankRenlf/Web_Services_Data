@@ -31,3 +31,11 @@ def test3(request):
                       "ui": user_info,
                       "ui_list": user_info_list
                   })
+
+
+# https://www.chinaunicomglobal.com/hk/unicmsApi/door/hkHotNews/hkHotNewslist
+import requests
+
+
+def test4(request):
+    return render(request, "news.html", )
