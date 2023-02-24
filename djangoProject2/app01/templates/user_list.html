@@ -14,5 +14,11 @@
         <span>{{ i }}</span>
     {% endfor %}
     <h3>{{ ui }}</h3>
+    {% for k,v in ui.items %}
+        <li>{{ k }}---{{ v }}</li>
+    {% endfor %}
+        {% for i in ui_list %}
+        <li>{{ i }}</li>
+    {% endfor %}
 </body>
 </html>

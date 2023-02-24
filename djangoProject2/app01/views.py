@@ -18,10 +18,16 @@ def test3(request):
         "address": 'hz',
         "age": 23
     }
+    user_info_list = [
+        {"name": 'f', "address": 'hz', "age": 23},
+        {"name": 'f', "address": 'hz', "age": 23},
+        {"name": 'f', "address": 'hz', "age": 23},
+    ]
     return render(request,
                   "user_list.html",
                   {
                       "d1": name,
                       "l1": list1,
-                      "ui": user_info
+                      "ui": user_info,
+                      "ui_list": user_info_list
                   })
