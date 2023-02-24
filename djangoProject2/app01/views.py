@@ -51,3 +51,16 @@ def test5(request):
     print(request.POST)
     # return render(request, "req.html")
     return redirect("https://www.bing.com")
+
+
+def login(request):
+    if request.method == "GET":
+        return render(request, "login.html")
+    else:
+        print(request.POST)
+        if request.POST.get("username") == "f" \
+                and request.POST.get("password") == "123":
+            return HttpResponse("success")
+        else:
+            return render(request, "login.html", {"error": "wrong account"})
+

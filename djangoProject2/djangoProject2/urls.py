@@ -23,4 +23,5 @@ urlpatterns = [
     path('vue', views.test3),
     path('news', views.test4),
     path('req', views.test5),
+    path('login', views.login),
 ]
