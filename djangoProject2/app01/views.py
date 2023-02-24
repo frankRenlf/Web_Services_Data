@@ -56,11 +56,11 @@ def test5(request):
 def login(request):
     if request.method == "GET":
         return render(request, "login.html")
-    else:
-        print(request.POST)
-        if request.POST.get("username") == "f" \
-                and request.POST.get("password") == "123":
-            return HttpResponse("success")
-        else:
-            return render(request, "login.html", {"error": "wrong account"})
+
+    print(request.POST)
+    if request.POST.get("username") == "f" \
+            and request.POST.get("password") == "123":
+        return HttpResponse("success")
+   
+    return render(request, "login.html", {"error": "wrong account"})
 
