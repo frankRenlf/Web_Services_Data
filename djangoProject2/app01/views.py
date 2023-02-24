@@ -61,6 +61,6 @@ def login(request):
     if request.POST.get("username") == "f" \
             and request.POST.get("password") == "123":
         return HttpResponse("success")
-   
+
     return render(request, "login.html", {"error": "wrong account"})
 
