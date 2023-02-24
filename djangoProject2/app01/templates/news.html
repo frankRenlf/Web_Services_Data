@@ -5,6 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-
+{% for i in dl %}
+    <li>{{ i.id }} --- {{ i.avatar_url }}</li>
+    <hr/>
+{% endfor %}
 </body>
 </html>

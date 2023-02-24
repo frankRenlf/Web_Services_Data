@@ -38,4 +38,14 @@ import requests
 
 
 def test4(request):
-    return render(request, "news.html", )
+    res = requests.get("https://api.github.com/users?since=2", verify=False)
+    data_list = res.json()
+    # print(data_list)
+    print(request.method)
+    return render(request, "news.html", {"dl": data_list})
+
+
+def test5(request):
+    # print(data_list)
+    print(request.GET)
+    return render(request, "req.html")

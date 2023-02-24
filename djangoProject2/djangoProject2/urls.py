@@ -22,4 +22,5 @@ urlpatterns = [
     path('', views.test2),
     path('vue', views.test3),
     path('news', views.test4),
+    path('req', views.test5),
 ]
