@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 
 
 # Create your views here.
@@ -49,4 +49,5 @@ def test5(request):
     # print(data_list)
     print(request.GET)
     print(request.POST)
-    return render(request, "req.html")
+    # return render(request, "req.html")
+    return redirect("https://www.bing.com")
