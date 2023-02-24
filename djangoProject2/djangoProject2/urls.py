@@ -20,4 +20,5 @@ from app01 import views
 
 urlpatterns = [
     path('', views.test2),
+    path('vue', views.test3),
 ]

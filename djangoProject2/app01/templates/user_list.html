@@ -7,6 +7,12 @@
 </head>
 <body>
     <h2>home page</h2>
-    <img src="{% static 'images/kitan.JPG' %}" alt="">
+{#    <img src="{% static 'images/kitan.JPG' %}" alt="">#}
+    <h3>{{ d1 }}</h3>
+    <h3>{{ l1 }}</h3>
+    {% for i in l1 %}
+        <span>{{ i }}</span>
+    {% endfor %}
+    <h3>{{ ui }}</h3>
 </body>
 </html>
