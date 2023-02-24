@@ -48,4 +48,5 @@ def test4(request):
 def test5(request):
     # print(data_list)
     print(request.GET)
+    print(request.POST)
     return render(request, "req.html")
