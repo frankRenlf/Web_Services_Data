@@ -18,6 +18,7 @@
         <th>username</th>
         <th>password</th>
         <th>phone</th>
+        <th>delete</th>
     </tr>
     </thead>
     <tbody>
@@ -26,6 +27,7 @@
             <td>{{ i.username }}</td>
             <td>{{ i.password }}</td>
             <td>{{ i.phone }}</td>
+            <td><a href="/user/delete?uid={{ i.id }}">delete</a></td>
         </tr>
     {% endfor %}
     </tbody>

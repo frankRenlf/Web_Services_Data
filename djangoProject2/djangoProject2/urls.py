@@ -26,4 +26,5 @@ urlpatterns = [
     path('login', views.login),
     path('user/info', views.userinfo),
     path('user/insert', views.insert),
+    path('user/delete', views.delete),
 ]

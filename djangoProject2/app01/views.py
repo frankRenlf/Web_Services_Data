@@ -79,6 +79,11 @@ def insert(request):
 
 def userinfo(request):
     dataList = UserInfo.objects.all()
-    print(dataList[0].username)
     return render(request, "user_info.html",
                   {"data_list": dataList})
+
+
+def delete(request):
+    uid = request.GET.get("uid")
+    UserInfo.objects.filter(id=uid).delete()
+    return redirect("/user/info")
