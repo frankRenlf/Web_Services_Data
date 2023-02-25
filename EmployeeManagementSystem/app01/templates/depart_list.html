@@ -11,7 +11,7 @@
 </head>
 <body>
 <nav class="navbar navbar-default">
-    <div class="container-fluid">
+    <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -27,22 +27,22 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-{#                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>#}
+                {#                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>#}
                 <li><a href="#">department manage</a></li>
                 <li><a href="#">Link</a></li>
-{#                <li class="dropdown">#}
-{#                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"#}
-{#                       aria-expanded="false">Dropdown <span class="caret"></span></a>#}
-{#                    <ul class="dropdown-menu">#}
-{#                        <li><a href="#">Action</a></li>#}
-{#                        <li><a href="#">Another action</a></li>#}
-{#                        <li><a href="#">Something else here</a></li>#}
-{#                        <li role="separator" class="divider"></li>#}
-{#                        <li><a href="#">Separated link</a></li>#}
-{#                        <li role="separator" class="divider"></li>#}
-{#                        <li><a href="#">One more separated link</a></li>#}
-{#                    </ul>#}
-{#                </li>#}
+                {#                <li class="dropdown">#}
+                {#                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"#}
+                {#                       aria-expanded="false">Dropdown <span class="caret"></span></a>#}
+                {#                    <ul class="dropdown-menu">#}
+                {#                        <li><a href="#">Action</a></li>#}
+                {#                        <li><a href="#">Another action</a></li>#}
+                {#                        <li><a href="#">Something else here</a></li>#}
+                {#                        <li role="separator" class="divider"></li>#}
+                {#                        <li><a href="#">Separated link</a></li>#}
+                {#                        <li role="separator" class="divider"></li>#}
+                {#                        <li><a href="#">One more separated link</a></li>#}
+                {#                    </ul>#}
+                {#                </li>#}
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">login</a></li>
@@ -50,17 +50,65 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Dropdown <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
+                        <li><a href="#">user info</a></li>
                         <li><a href="#">Another action</a></li>
                         <li><a href="#">Something else here</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">log out</a></li>
                     </ul>
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+<div>
+    <div class="container">
+        <div>
+            <a href="#" class="btn btn-primary">add new department</a>
+        </div>
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">Panel heading</div>
+            <div class="panel-body">
+                <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum
+                    nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis
+                    vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            </div>
+
+            <!-- Table -->
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 <script src="{% static 'js/jquery.js' %}"></script>
 <script src="{% static 'plugins/bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
 </body>
