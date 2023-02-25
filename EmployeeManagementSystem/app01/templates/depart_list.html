@@ -63,12 +63,18 @@
 </nav>
 <div>
     <div class="container">
-        <div>
-            <a href="#" class="btn btn-primary">add new department</a>
+        <div style="margin-bottom: 10px">
+            <a href="#" class="btn btn-success">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                add new department
+            </a>
         </div>
         <div class="panel panel-default">
             <!-- Default panel contents -->
-            <div class="panel-heading">Panel heading</div>
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                department list
+            </div>
             <div class="panel-body">
                 <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum
                     nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis
@@ -76,33 +82,22 @@
             </div>
 
             <!-- Table -->
-            <table class="table">
+            <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>OPERATION</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <th scope="row">1</th>
+                    <th>1</th>
                     <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
+                    <td>
+                        <a href="#" class="btn btn-primary btn-xs">edit</a>
+                        <a href="#" class="btn btn-primary btn-xs">delete</a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
