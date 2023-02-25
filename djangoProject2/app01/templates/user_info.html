@@ -5,6 +5,31 @@
     <title>Title</title>
 </head>
 <body>
+<form action="/user/insert" method="post">
+    {% csrf_token %}
+    <input type="text" name="username">
+    <input type="password" name="password">
+    <input type="text" name="phone">
+    <input type="submit" value="submit">
+</form>
+<table>
+    <thead>
+    <tr>
+        <th>username</th>
+        <th>password</th>
+        <th>phone</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for i in data_list %}
+        <tr>
+            <td>{{ i.username }}</td>
+            <td>{{ i.password }}</td>
+            <td>{{ i.phone }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 
 </body>
 </html>

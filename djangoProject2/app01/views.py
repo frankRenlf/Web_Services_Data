@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.shortcuts import render, HttpResponse, redirect
 
+from app01.models import UserInfo
+
 
 # Create your views here.
 def test1(request):
@@ -66,5 +68,14 @@ def login(request):
 
 
 def insert(request):
+    # UserInfo.objects.create(username="frank", password=123, phone=2222)
+    # UserInfo.objects.create(username="lily", password=222, phone=111)
+    
+    return HttpResponse("insert success")
 
-    return render(request, "user_info.html", {"data":})
+
+def userinfo(request):
+    dataList = UserInfo.objects.all()
+    print(dataList[0].username)
+    return render(request, "user_info.html",
+                  {"data_list": dataList})
