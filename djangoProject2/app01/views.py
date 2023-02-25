@@ -70,8 +70,11 @@ def login(request):
 def insert(request):
     # UserInfo.objects.create(username="frank", password=123, phone=2222)
     # UserInfo.objects.create(username="lily", password=222, phone=111)
-    
-    return HttpResponse("insert success")
+    username = request.POST.get("username")
+    password = request.POST.get("password")
+    phone = request.POST.get("phone")
+    UserInfo.objects.create(username=username, password=password, phone=phone)
+    return redirect("/user/info")
 
 
 def userinfo(request):
