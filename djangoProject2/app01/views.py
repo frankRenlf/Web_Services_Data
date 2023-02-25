@@ -64,3 +64,7 @@ def login(request):
 
     return render(request, "login.html", {"error": "wrong account"})
 
+
+def insert(request):
+
+    return render(request, "user_info.html", {"data":})
