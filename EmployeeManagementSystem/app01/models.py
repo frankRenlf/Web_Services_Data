@@ -20,4 +20,4 @@ class UserInfo(models.Model):
     # delete relevant user
     # depart = models.ForeignKey(to="Department", to_fields="id", on_delete=models.CASCADE)
     # remove depart_id
-    depart = models.ForeignKey(to="Department", to_fields="id", null=True, blank=True, on_delete=models.SET_NULL)
+    depart = models.ForeignKey(to="Department", to_field="id", null=True, blank=True, on_delete=models.SET_NULL)
