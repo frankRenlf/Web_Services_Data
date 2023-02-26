@@ -26,6 +26,7 @@ urlpatterns = [
 
     path('user/list', views.user_list),
     path('user/add', views.user_add),
+    path('user/modelForm/add', views.user_modelform_add),
     path('user/delete', views.user_delete),
     path('user/<int:uid>/edit', views.user_edit),
 ]

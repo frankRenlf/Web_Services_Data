@@ -51,11 +51,11 @@ def user_add(request):
     user.gender = request.POST.get("gender")
     user.salary = request.POST.get("salary")
     user.create_time = request.POST.get("create_time")
-    user.depart_id = request.POST.get("depart_id")
+    user.depart = request.POST.get("depart")
     models.UserInfo.objects.create(name=user.name, password=user.password, age=user.age, gender=user.gender,
                                    salary=user.salary,
                                    create_time=user.create_time,
-                                   depart_id=user.depart_id)
+                                   depart_id=user.depart.id)
     return redirect('/user/list')
 
 
@@ -69,4 +69,39 @@ def user_edit(request, uid):
     #     return render(request, 'depart_edit.html', {"title": title})
     # title = request.POST.get("title")
     # models.Department.objects.filter(id=did).update(title=title)
+    return redirect('/user/list')
+
+
+from django import forms
+
+
+class UserModelForm(forms.ModelForm):
+    class Meta:
+        model = models.UserInfo
+        fields = ["name", "password", "age", "gender", "salary", "create_time", "depart"]
+
+    def __init__(self, data=None, files=None, auto_id="id_%s", prefix=None, initial=None, error_class=None,
+                 label_suffix=None, empty_permitted=False, instance=None, use_required_attribute=None, renderer=None):
+        super().__init__(data, files, auto_id, prefix, initial, error_class, label_suffix, empty_permitted, instance,
+                         use_required_attribute, renderer)
+        for name, field in self.fields.items():
+            field.widget.attrs = {"class": "form-control"}
+
+
+def user_modelform_add(request):
+    if request.method == "GET":
+        userForm = UserModelForm()
+        return render(request, 'userForm_add.html', {"userForm": userForm})
+    user = models.UserInfo
+    user.name = request.POST.get("name")
+    user.password = request.POST.get("password")
+    user.age = request.POST.get("age")
+    user.gender = request.POST.get("gender")
+    user.salary = request.POST.get("salary")
+    user.create_time = request.POST.get("create_time")
+    user.depart = request.POST.get("depart_id")
+    models.UserInfo.objects.create(name=user.name, password=user.password, age=user.age, gender=user.gender,
+                                   salary=user.salary,
+                                   create_time=user.create_time,
+                                   depart_id=user.depart.id)
     return redirect('/user/list')

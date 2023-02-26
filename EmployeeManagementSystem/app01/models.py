@@ -5,6 +5,9 @@ from django.db import models
 class Department(models.Model):
     title = models.CharField(max_length=32)
 
+    def __str__(self):
+        return self.title
+
 
 class UserInfo(models.Model):
     name = models.CharField(max_length=16)
@@ -21,3 +24,5 @@ class UserInfo(models.Model):
     # depart = models.ForeignKey(to="Department", to_fields="id", on_delete=models.CASCADE)
     # remove depart_id
     depart = models.ForeignKey(to="Department", to_field="id", null=True, blank=True, on_delete=models.SET_NULL)
+
+
