@@ -4,9 +4,9 @@ from app01 import models
 
 # Create your views here.
 def depart_list(request):
-    depart_list = models.Department.objects.all()
+    depart_union = models.Department.objects.all()
     return render(request, 'depart_list.html',
-                  {"depart_list": depart_list})
+                  {"depart_union": depart_union})
 
 
 def depart_add(request):
@@ -32,3 +32,19 @@ def depart_edit(request, did):
     title = request.POST.get("title")
     models.Department.objects.filter(id=did).update(title=title)
     return redirect('/depart/list')
+
+
+def user_list(request):
+    return render(request, 'user_list.html')
+
+
+def user_add(request):
+    return None
+
+
+def user_delete(request):
+    return None
+
+
+def user_edit(request):
+    return None
