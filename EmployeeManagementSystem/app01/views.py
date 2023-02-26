@@ -50,9 +50,12 @@ def user_add(request):
     user.age = request.POST.get("age")
     user.gender = request.POST.get("gender")
     user.salary = request.POST.get("salary")
+    user.create_time = request.POST.get("create_time")
     user.depart_id = request.POST.get("depart_id")
-    models.Department.objects.create(name=user.name, age=user.age, gender=user.gender, salary=user.salary,
-                                     depart_id=user.depart_id)
+    models.UserInfo.objects.create(name=user.name, password=user.password, age=user.age, gender=user.gender,
+                                   salary=user.salary,
+                                   create_time=user.create_time,
+                                   depart_id=user.depart_id)
     return redirect('/user/list')
 
 
