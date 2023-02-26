@@ -83,15 +83,16 @@ def user_modelform_add(request):
 
 
 def user_modelform_edit(request, uid):
-    # if request.method == "GET":
-    #     user_null = UserModelForm()
-    #     return render(request, 'userForm_edit.html', {"userForm": user_null})
-    # user_form = UserModelForm(data=request.POST)
-    # if user_form.is_valid():
-    #     user_form.save()
-    #     return redirect('/user/list')
-    # return render(request, 'userForm_edit.html', {"userForm": user_form})
-    return HttpResponse(uid)
+    user = models.UserInfo.objects.filter(id=uid).first()
+    if request.method == "GET":
+        user_null = UserModelForm(instance=user)
+        return render(request, 'userForm_edit.html', {"userForm": user_null})
+    user_form = UserModelForm(data=request.POST, instance=user)
+    if user_form.is_valid():
+        user_form.save()
+        return redirect('/user/list')
+    return render(request, 'userForm_edit.html', {"userForm": user_form})
+    # return HttpResponse(uid)
 
 
 def user_delete(request):
