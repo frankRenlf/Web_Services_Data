@@ -25,5 +25,6 @@ def depart_delete(request):
     return redirect('/depart/list')
 
 
-def depart_edit(request):
+def depart_edit(request, did):
+    
     return render(request, 'depart_edit.html')

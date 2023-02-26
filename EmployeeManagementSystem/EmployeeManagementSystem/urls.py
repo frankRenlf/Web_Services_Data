@@ -22,6 +22,5 @@ urlpatterns = [
     path('depart/list', views.depart_list),
     path('depart/add', views.depart_add),
     path('depart/delete', views.depart_delete),
-    path('depart/edit', views.depart_edit),
-
+    path('depart/<int:did>/edit', views.depart_edit),
 ]
