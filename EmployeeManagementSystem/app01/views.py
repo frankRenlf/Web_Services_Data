@@ -51,7 +51,7 @@ def user_add(request):
     user.gender = request.POST.get("gender")
     user.salary = request.POST.get("salary")
     user.create_time = request.POST.get("create_time")
-    user.depart = request.POST.get("depart")
+    user.depart.id = request.POST.get("depart_id")
     models.UserInfo.objects.create(name=user.name, password=user.password, age=user.age, gender=user.gender,
                                    salary=user.salary,
                                    create_time=user.create_time,
@@ -80,28 +80,18 @@ class UserModelForm(forms.ModelForm):
         model = models.UserInfo
         fields = ["name", "password", "age", "gender", "salary", "create_time", "depart"]
 
-    def __init__(self, data=None, files=None, auto_id="id_%s", prefix=None, initial=None, error_class=None,
-                 label_suffix=None, empty_permitted=False, instance=None, use_required_attribute=None, renderer=None):
-        super().__init__(data, files, auto_id, prefix, initial, error_class, label_suffix, empty_permitted, instance,
-                         use_required_attribute, renderer)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         for name, field in self.fields.items():
             field.widget.attrs = {"class": "form-control"}
 
 
 def user_modelform_add(request):
     if request.method == "GET":
-        userForm = UserModelForm()
-        return render(request, 'userForm_add.html', {"userForm": userForm})
-    user = models.UserInfo
-    user.name = request.POST.get("name")
-    user.password = request.POST.get("password")
-    user.age = request.POST.get("age")
-    user.gender = request.POST.get("gender")
-    user.salary = request.POST.get("salary")
-    user.create_time = request.POST.get("create_time")
-    user.depart = request.POST.get("depart_id")
-    models.UserInfo.objects.create(name=user.name, password=user.password, age=user.age, gender=user.gender,
-                                   salary=user.salary,
-                                   create_time=user.create_time,
-                                   depart_id=user.depart.id)
-    return redirect('/user/list')
+        user_null = UserModelForm()
+        return render(request, 'userForm_add.html', {"userForm": user_null})
+    user_form = UserModelForm(data=request.POST)
+    if user_form.is_valid():
+        user_form.save()
+        return redirect('/user/list')
+    return render(request, 'userForm_add.html', {"userForm": user_form})
