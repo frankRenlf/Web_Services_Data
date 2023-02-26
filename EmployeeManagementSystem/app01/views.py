@@ -40,12 +40,22 @@ def user_list(request):
 
 
 def user_add(request):
-    return None
+    if request.method == "GET":
+        return render(request, 'user_add.html')
+
+    depart_title = request.POST.get("title")
+    models.Department.objects.create(title=depart_title)
+    return redirect('/user/list')
 
 
 def user_delete(request):
-    return None
+    return redirect('/user/list')
 
 
-def user_edit(request):
-    return None
+def user_edit(request, uid):
+    # if request.method == "GET":
+    #     title = models.Department.objects.filter(id=uid).all()[0].title
+    #     return render(request, 'depart_edit.html', {"title": title})
+    # title = request.POST.get("title")
+    # models.Department.objects.filter(id=did).update(title=title)
+    return redirect('/user/list')

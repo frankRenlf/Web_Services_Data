@@ -29,6 +29,8 @@
                     <th>GENDER</th>
                     <th>SALARY</th>
                     <th>CREATE_TIME</th>
+                    <th>DEPART_ID</th>
+                    <th>DEPART_TITLE</th>
                     <th>OPERATION</th>
                 </tr>
                 </thead>
@@ -38,9 +40,11 @@
                         <th>{{ i.id }}</th>
                         <td>{{ i.name }}</td>
                         <td>{{ i.age }}</td>
-                        <td>{{ i.gender }}</td>
+                        <td>{{ i.get_gender_display }}</td>
                         <td>{{ i.salary }}</td>
-                        <td>{{ i.create_time }}</td>
+                        <td>{{ i.create_time | date:"Y-m-d" }}</td>
+                        <td>{{ i.depart_id }}</td>
+                        <td>{{ i.depart.title }}</td>
                         <td>
                             <a href="/user/{{ i.id }}/edit" class="btn btn-primary btn-xs">edit</a>
                             <a href="/user/delete?id={{ i.id }}" class="btn btn-primary btn-xs">delete</a>
