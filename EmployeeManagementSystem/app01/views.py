@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from app01 import models
+from django import forms
 
 
 # Create your views here.
@@ -34,6 +35,17 @@ def depart_edit(request, did):
     return redirect('/depart/list')
 
 
+class UserModelForm(forms.ModelForm):
+    class Meta:
+        model = models.UserInfo
+        fields = ["name", "password", "age", "gender", "salary", "create_time", "depart"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for name, field in self.fields.items():
+            field.widget.attrs = {"class": "form-control"}
+
+
 def user_list(request):
     user_union = models.UserInfo.objects.all()
     return render(request, 'user_list.html', {'user_union': user_union})
@@ -59,33 +71,6 @@ def user_add(request):
     return redirect('/user/list')
 
 
-def user_delete(request):
-    return redirect('/user/list')
-
-
-def user_edit(request, uid):
-    # if request.method == "GET":
-    #     title = models.Department.objects.filter(id=uid).all()[0].title
-    #     return render(request, 'depart_edit.html', {"title": title})
-    # title = request.POST.get("title")
-    # models.Department.objects.filter(id=did).update(title=title)
-    return redirect('/user/list')
-
-
-from django import forms
-
-
-class UserModelForm(forms.ModelForm):
-    class Meta:
-        model = models.UserInfo
-        fields = ["name", "password", "age", "gender", "salary", "create_time", "depart"]
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for name, field in self.fields.items():
-            field.widget.attrs = {"class": "form-control"}
-
-
 def user_modelform_add(request):
     if request.method == "GET":
         user_null = UserModelForm()
@@ -95,3 +80,21 @@ def user_modelform_add(request):
         user_form.save()
         return redirect('/user/list')
     return render(request, 'userForm_add.html', {"userForm": user_form})
+
+
+def user_modelform_edit(request, uid):
+    # if request.method == "GET":
+    #     user_null = UserModelForm()
+    #     return render(request, 'userForm_edit.html', {"userForm": user_null})
+    # user_form = UserModelForm(data=request.POST)
+    # if user_form.is_valid():
+    #     user_form.save()
+    #     return redirect('/user/list')
+    # return render(request, 'userForm_edit.html', {"userForm": user_form})
+    return HttpResponse(uid)
+
+
+def user_delete(request):
+    uid = request.GET.get("id")
+    models.UserInfo.objects.filter(id=uid).delete()
+    return redirect('/user/list')
