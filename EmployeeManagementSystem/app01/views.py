@@ -41,10 +41,18 @@ def user_list(request):
 
 def user_add(request):
     if request.method == "GET":
-        return render(request, 'user_add.html')
-
-    depart_title = request.POST.get("title")
-    models.Department.objects.create(title=depart_title)
+        departs = models.Department.objects.all()
+        gender_choices = models.UserInfo.gender_choices
+        return render(request, 'user_add.html', {"departs": departs, "gender_choices": gender_choices})
+    user = models.UserInfo
+    user.name = request.POST.get("name")
+    user.password = request.POST.get("password")
+    user.age = request.POST.get("age")
+    user.gender = request.POST.get("gender")
+    user.salary = request.POST.get("salary")
+    user.depart_id = request.POST.get("depart_id")
+    models.Department.objects.create(name=user.name, age=user.age, gender=user.gender, salary=user.salary,
+                                     depart_id=user.depart_id)
     return redirect('/user/list')
 
 
