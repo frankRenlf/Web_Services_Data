@@ -91,14 +91,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th>1</th>
-                    <td>Mark</td>
-                    <td>
-                        <a href="#" class="btn btn-primary btn-xs">edit</a>
-                        <a href="#" class="btn btn-primary btn-xs">delete</a>
-                    </td>
-                </tr>
+                {% for i in depart_list %}
+                    <tr>
+                        <th>{{ i.id}}</th>
+                        <td>{{ i.title }}</td>
+                        <td>
+                            <a href="#" class="btn btn-primary btn-xs">edit</a>
+                            <a href="#" class="btn btn-primary btn-xs">delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
                 </tbody>
             </table>
         </div>
