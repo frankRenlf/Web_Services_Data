@@ -26,5 +26,9 @@ def depart_delete(request):
 
 
 def depart_edit(request, did):
-    
-    return render(request, 'depart_edit.html')
+    if request.method == "GET":
+        title = models.Department.objects.filter(id=did).all()[0].title
+        return render(request, 'depart_edit.html', {"title": title})
+    title = request.POST.get("title")
+    models.Department.objects.filter(id=did).update(title=title)
+    return redirect('/depart/list')
