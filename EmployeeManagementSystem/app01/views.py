@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from app01 import models
 
 
@@ -12,8 +12,14 @@ def depart_list(request):
 def depart_add(request):
     if request.method == "GET":
         return render(request, 'depart_add.html')
-    else:
-        depart_title = request.POST.get("title")
-        models.Department.objects.create(title=depart_title)
-        return
 
+    depart_title = request.POST.get("title")
+    models.Department.objects.create(title=depart_title)
+    return redirect('/depart/list')
+
+
+def depart_delete(request):
+    # print(request.method)
+    depart_id = request.GET.get("id")
+    models.Department.objects.filter(id=depart_id).delete()
+    return redirect('/depart/list')
