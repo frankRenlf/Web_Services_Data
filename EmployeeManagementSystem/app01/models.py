@@ -26,3 +26,17 @@ class UserInfo(models.Model):
     depart = models.ForeignKey(to="Department", to_field="id", null=True, blank=True, on_delete=models.SET_NULL)
 
 
+class PrettyNumber(models.Model):
+    mobile = models.CharField(max_length=11)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+    level_choices = (
+        (1, "first"),
+        (2, "second"),
+        (3, "third"),
+    )
+    status_choices = (
+        (0, "Occupied"),
+        (1, "Available")
+    )
+    level = models.SmallIntegerField(choices=level_choices, default=1)
+    status = models.SmallIntegerField(choices=status_choices, default=1)
