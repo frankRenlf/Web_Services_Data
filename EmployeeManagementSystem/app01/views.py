@@ -23,3 +23,7 @@ def depart_delete(request):
     depart_id = request.GET.get("id")
     models.Department.objects.filter(id=depart_id).delete()
     return redirect('/depart/list')
+
+
+def depart_edit(request):
+    return render(request, 'depart_edit.html')
