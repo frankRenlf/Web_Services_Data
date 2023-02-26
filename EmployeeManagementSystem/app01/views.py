@@ -10,7 +10,10 @@ def depart_list(request):
 
 
 def depart_add(request):
-    depart_title = request.POST.get("title")
-    models.Department.objects.create(title=depart_title)
-    return render(request, 'depart_list.html',
-                  {"depart_list": depart_list})
+    if request.method == "GET":
+        return render(request, 'depart_add.html')
+    else:
+        depart_title = request.POST.get("title")
+        models.Department.objects.create(title=depart_title)
+        return
+
