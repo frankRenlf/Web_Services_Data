@@ -25,14 +25,22 @@
                 <tr>
                     <th>ID</th>
                     <th>NAME</th>
+                    <th>AGE</th>
+                    <th>GENDER</th>
+                    <th>SALARY</th>
+                    <th>CREATE_TIME</th>
                     <th>OPERATION</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for i in depart_list %}
+                {% for i in user_union %}
                     <tr>
                         <th>{{ i.id }}</th>
-                        <td>{{ i.title }}</td>
+                        <td>{{ i.name }}</td>
+                        <td>{{ i.age }}</td>
+                        <td>{{ i.gender }}</td>
+                        <td>{{ i.salary }}</td>
+                        <td>{{ i.create_time }}</td>
                         <td>
                             <a href="/user/{{ i.id }}/edit" class="btn btn-primary btn-xs">edit</a>
                             <a href="/user/delete?id={{ i.id }}" class="btn btn-primary btn-xs">delete</a>

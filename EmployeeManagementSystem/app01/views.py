@@ -35,7 +35,8 @@ def depart_edit(request, did):
 
 
 def user_list(request):
-    return render(request, 'user_list.html')
+    user_union = models.UserInfo.objects.all()
+    return render(request, 'user_list.html', {'user_union': user_union})
 
 
 def user_add(request):
