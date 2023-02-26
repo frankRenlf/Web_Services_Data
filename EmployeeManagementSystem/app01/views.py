@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect, HttpResponse
 from app01 import models
 from django import forms
 
-
 # Create your views here.
+""" create depart operations """
+
+
 def depart_list(request):
     depart_union = models.Department.objects.all()
     return render(request, 'depart_list.html',
@@ -33,6 +35,9 @@ def depart_edit(request, did):
     title = request.POST.get("title")
     models.Department.objects.filter(id=did).update(title=title)
     return redirect('/depart/list')
+
+
+""" create userinfo operations """
 
 
 class UserModelForm(forms.ModelForm):
@@ -99,3 +104,6 @@ def user_delete(request):
     uid = request.GET.get("id")
     models.UserInfo.objects.filter(id=uid).delete()
     return redirect('/user/list')
+
+
+""" create prettyNumber operations """
