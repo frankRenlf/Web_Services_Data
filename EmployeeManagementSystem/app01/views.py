@@ -1,7 +1,15 @@
-from django.shortcuts import render, redirect, HttpResponse
-from app01 import models
 from django import forms
 from django.core.exceptions import ValidationError
+from django.shortcuts import render, redirect
+
+from app01 import models
+
+""" create depart operations """
+
+
+def home(request):
+    return render(request, 'layout.html')
+
 
 # Create your views here.
 """ create depart operations """
@@ -122,7 +130,8 @@ class PrettyModelForm(forms.ModelForm):
 
     def clean_mobile(self):
         mobile_txt = self.cleaned_data["mobile"]
-        if models.PrettyNumber.objects.filter(mobile=mobile_txt).exists():
+        pid = self.instance.pk
+        if models.PrettyNumber.objects.filter(mobile=mobile_txt).exclude(id=pid).exists():
             raise ValidationError("Number already exists")
         if len(mobile_txt) != 11:
             raise ValidationError("Length must be 11")
