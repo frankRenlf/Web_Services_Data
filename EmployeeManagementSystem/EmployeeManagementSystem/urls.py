@@ -30,4 +30,8 @@ urlpatterns = [
     path('user/delete', views.user_delete),
     path('user/<int:uid>/edit', views.user_modelform_edit),
     # pretty
+    path('pretty/list', views.pretty_list),
+    path('pretty/add', views.pretty_add),
+    path('pretty/<int:pid>/delete', views.pretty_delete),
+    path('pretty/<int:pid>/edit', views.pretty_edit),
 ]

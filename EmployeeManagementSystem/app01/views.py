@@ -107,3 +107,47 @@ def user_delete(request):
 
 
 """ create prettyNumber operations """
+
+
+class PrettyModelForm(forms.ModelForm):
+    class Meta:
+        model = models.PrettyNumber
+        fields = ["mobile", "price", "level", "status"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for name, field in self.fields.items():
+            field.widget.attrs = {"class": "form-control"}
+
+
+def pretty_list(request):
+    number_list = models.PrettyNumber.objects.all()
+    return render(request, 'pretty_list.html', {"number_list": number_list})
+
+
+def pretty_add(request):
+    if request.method == "GET":
+        pretty_null = PrettyModelForm()
+        return render(request, 'prettyForm_add.html', {"prettyForm": pretty_null})
+    pretty_form = PrettyModelForm(data=request.POST)
+    if pretty_form.is_valid():
+        pretty_form.save()
+        return redirect('/pretty/list')
+    return render(request, 'prettyForm_add.html', {"prettyForm": pretty_form})
+
+
+def pretty_delete(request, pid):
+    models.PrettyNumber.objects.filter(id=pid).delete()
+    return redirect('/pretty/list')
+
+
+def pretty_edit(request, pid):
+    pretty = models.PrettyNumber.objects.filter(id=pid).first()
+    if request.method == "GET":
+        pretty_null = PrettyModelForm(instance=pretty)
+        return render(request, 'prettyForm_edit.html', {"prettyForm": pretty_null})
+    pretty_form = PrettyModelForm(data=request.POST, instance=pretty)
+    if pretty_form.is_valid():
+        pretty_form.save()
+        return redirect('/pretty/list')
+    return render(request, 'prettyForm_edit.html', {"prettyForm": pretty_form})
