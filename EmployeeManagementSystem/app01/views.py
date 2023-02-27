@@ -122,6 +122,8 @@ class PrettyModelForm(forms.ModelForm):
 
     def clean_mobile(self):
         mobile_txt = self.cleaned_data["mobile"]
+        if models.PrettyNumber.objects.filter(mobile=mobile_txt).exists():
+            raise ValidationError("Number already exists")
         if len(mobile_txt) != 11:
             raise ValidationError("Length must be 11")
         return mobile_txt
