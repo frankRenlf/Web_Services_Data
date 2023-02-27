@@ -138,7 +138,7 @@ class PrettyModelForm(forms.ModelForm):
 
 
 def pretty_list(request):
-    sub = request.GET.get("sub")
+    sub = request.GET.get("mobile")
     data_dict = {}
     if sub:
         data_dict["mobile__contains"] = sub
