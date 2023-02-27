@@ -142,7 +142,7 @@ def pretty_list(request):
     data_dict = {}
     if sub:
         data_dict["mobile__contains"] = sub
-    print(data_dict)
+    # print(data_dict)
     number_list = models.PrettyNumber.objects.filter(**data_dict).order_by("-level")
     return render(request, 'pretty_list.html', {"number_list": number_list})
 
