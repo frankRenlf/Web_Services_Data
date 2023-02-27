@@ -121,7 +121,7 @@ class PrettyModelForm(forms.ModelForm):
 
 
 def pretty_list(request):
-    number_list = models.PrettyNumber.objects.all()
+    number_list = models.PrettyNumber.objects.all().order_by("-level")
     return render(request, 'pretty_list.html', {"number_list": number_list})
 
 

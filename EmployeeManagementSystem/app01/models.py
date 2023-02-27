@@ -30,9 +30,9 @@ class PrettyNumber(models.Model):
     mobile = models.CharField(max_length=11)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
     level_choices = (
-        (1, "first"),
-        (2, "second"),
-        (3, "third"),
+        (1, "FIRST"),
+        (2, "SECOND"),
+        (3, "THIRD"),
     )
     status_choices = (
         (0, "Occupied"),

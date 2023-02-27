@@ -37,8 +37,8 @@
                         <th>{{ i.id }}</th>
                         <td>{{ i.mobile }}</td>
                         <td>{{ i.price }}</td>
-                        <td>{{ i.level }}</td>
-                        <td>{{ i.status }}</td>
+                        <td>{{ i.get_level_display }}</td>
+                        <td>{{ i.get_status_display }}</td>
                         <td>
                             <a href="/pretty/{{ i.id }}/edit" class="btn btn-primary btn-xs">edit</a>
                             <a href="/pretty/{{ i.id }}/delete" class="btn btn-primary btn-xs">delete</a>
