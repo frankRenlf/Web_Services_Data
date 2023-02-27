@@ -1,7 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
-
 from app01 import models
 
 """ create depart operations """
@@ -139,7 +138,12 @@ class PrettyModelForm(forms.ModelForm):
 
 
 def pretty_list(request):
-    number_list = models.PrettyNumber.objects.all().order_by("-level")
+    sub = request.GET.get("sub")
+    data_dict = {}
+    if sub:
+        data_dict["mobile__contains"] = sub
+    print(data_dict)
+    number_list = models.PrettyNumber.objects.filter(**data_dict).order_by("-level")
     return render(request, 'pretty_list.html', {"number_list": number_list})
 
 
