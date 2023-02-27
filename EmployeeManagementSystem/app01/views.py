@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from app01 import models
 from django import forms
+from django.core.exceptions import ValidationError
 
 # Create your views here.
 """ create depart operations """
@@ -118,6 +119,12 @@ class PrettyModelForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for name, field in self.fields.items():
             field.widget.attrs = {"class": "form-control"}
+
+    def clean_mobile(self):
+        mobile_txt = self.cleaned_data["mobile"]
+        if len(mobile_txt) != 11:
+            raise ValidationError("Length must be 11")
+        return mobile_txt
 
 
 def pretty_list(request):
