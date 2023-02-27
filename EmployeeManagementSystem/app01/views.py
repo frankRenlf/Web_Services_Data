@@ -144,7 +144,7 @@ def pretty_add(request):
 
 
 def pretty_delete(request, pid):
-    models.PrettyNumber.objects.filter(id=pid).delete()
+    models.PrettyNumber.objects.filter(id=pid).first().delete()
     return redirect('/pretty/list')
 
 
