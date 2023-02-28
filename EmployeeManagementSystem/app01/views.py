@@ -156,24 +156,28 @@ def pretty_list(request):
     page_list = []
     sub = 2
     first = max(page_index - sub, 1)
+    page_list.append('<li class=""><a href="?index={}&&mobile={}" aria-label="Previous">'
+                     '<span aria-hidden="true">First</span></a></li>'.format(1, mobile_txt))
     if page_index == 1:
-        page_list.append('<li class="disabled"><a href="#" aria-label="Previous">'
-                         '<span aria-hidden="true">«</span></a></li>')
+        page_list.append('<li class="disabled"><a href="?mobile={}" aria-label="Previous">'
+                         '<span aria-hidden="true">«</span></a></li>'.format(mobile_txt))
     else:
-        page_list.append('<li class=""><a href="?index={}" aria-label="Previous">'
-                         '<span aria-hidden="true">«</span></a></li>'.format(page_index - 1))
+        page_list.append('<li class=""><a href="?index={}&&mobile={}" aria-label="Previous">'
+                         '<span aria-hidden="true">«</span></a></li>'.format(page_index - 1, mobile_txt))
     end = min(page_index + sub, data_size)
     for i in range(first, end + 1):
         if i == page_index:
-            page_list.append('<li class=active><a href="?index={}">{}</a></li>'.format(i, i))
+            page_list.append('<li class=active><a href="?index={}&&mobile={}">{}</a></li>'.format(i, mobile_txt, i))
         else:
-            page_list.append('<li><a href="?index={}">{}</a></li>'.format(i, i))
+            page_list.append('<li><a href="?index={}&&mobile={}">{}</a></li>'.format(i, mobile_txt, i))
     if page_index == data_size:
-        page_list.append('<li class="disabled"><a href="#" aria-label="Next">'
-                         '<span aria-hidden="true">»</span></a></li>')
+        page_list.append('<li class="disabled"><a href="?index={}&&mobile={}" aria-label="Next">'
+                         '<span aria-hidden="true">»</span></a></li>'.format(page_index, mobile_txt))
     else:
-        page_list.append('<li class=""><a href="?index={}" aria-label="Next">'
-                         '<span aria-hidden="true">»</span></a></li>'.format(page_index + 1))
+        page_list.append('<li class=""><a href="?index={}&&mobile={}" aria-label="Next">'
+                         '<span aria-hidden="true">»</span></a></li>'.format(page_index + 1, mobile_txt))
+    page_list.append('<li class=""><a href="?index={}&&mobile={}" aria-label="Previous">'
+                     '<span aria-hidden="true">End</span></a></li>'.format(data_size, mobile_txt))
     page_str = mark_safe("".join(page_list))
     return render(request, 'pretty_list.html',
                   {"number_list": number_list, "page_list": page_str,
