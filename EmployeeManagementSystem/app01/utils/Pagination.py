@@ -4,7 +4,7 @@ from django.utils.safestring import mark_safe
 
 
 class Pagination(object):
-    def __init__(self, request, data_list, search, page_size=3, params="index", sub=2):
+    def __init__(self, request, data_list, search='id', page_size=3, params="index", sub=2):
         self.page_index = int(request.GET.get(params, 1) if request.GET.get(params, 1) != '' else 1)
         mobile_txt = request.GET.get(search)
         self.search = search

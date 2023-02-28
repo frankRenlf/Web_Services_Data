@@ -65,7 +65,8 @@ class UserModelForm(forms.ModelForm):
 
 def user_list(request):
     user_union = models.UserInfo.objects.all()
-    return render(request, 'user_list.html', {'user_union': user_union})
+    pagination = Pagination(request, user_union)
+    return render(request, 'user_list.html', {'user_union': pagination.number_list, "page_list": pagination.page_list})
 
 
 def user_add(request):
