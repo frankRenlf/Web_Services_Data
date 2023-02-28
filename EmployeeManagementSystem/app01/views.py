@@ -142,18 +142,19 @@ class PrettyModelForm(forms.ModelForm):
 def pretty_list(request):
     mobile_txt = request.GET.get("mobile")
     page_index = int(request.GET.get('index', 1))
-    page_start = (page_index - 1) * 3
-    page_end = page_index * 3
+    page_size = 3
+    page_start = (page_index - 1) * page_size
+    page_end = page_index * page_size
     data_dict = {}
     if mobile_txt:
         data_dict["mobile__contains"] = mobile_txt
     # print(data_dict)
     number_list = models.PrettyNumber.objects.filter(**data_dict).order_by("-level")[page_start: page_end]
-    page_size = math.ceil(len(models.PrettyNumber.objects.all())/3.0)
-    print(page_size)
+    data_size = math.ceil(len(models.PrettyNumber.objects.all())/page_size)
+    print(data_size)
     pages = []
     i = 1
-    while i <= page_size:
+    while i <= data_size:
         pages.append(i)
         i += 1
     return render(request, 'pretty_list.html', {"number_list": number_list, "page_size": pages})
