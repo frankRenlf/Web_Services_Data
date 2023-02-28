@@ -45,26 +45,24 @@
                 </thead>
                 <tbody>
                 {% for i in number_list %}
-                <tr>
-                    <th>{{ i.id }}</th>
-                    <td>{{ i.mobile }}</td>
-                    <td>{{ i.price }}</td>
-                    <td>{{ i.get_level_display }}</td>
-                    <td>{{ i.get_status_display }}</td>
-                    <td>
-                        <a href="/pretty/{{ i.id }}/edit" class="btn btn-primary btn-xs">edit</a>
-                        <a href="/pretty/{{ i.id }}/delete" class="btn btn-primary btn-xs">delete</a>
-                    </td>
-                </tr>
+                    <tr>
+                        <th>{{ i.id }}</th>
+                        <td>{{ i.mobile }}</td>
+                        <td>{{ i.price }}</td>
+                        <td>{{ i.get_level_display }}</td>
+                        <td>{{ i.get_status_display }}</td>
+                        <td>
+                            <a href="/pretty/{{ i.id }}/edit" class="btn btn-primary btn-xs">edit</a>
+                            <a href="/pretty/{{ i.id }}/delete" class="btn btn-primary btn-xs">delete</a>
+                        </td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>
         </div>
         <ul class="pagination">
             <li><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-            {% for index in page_size %}
-                <li><a href="?index={{ index }}">{{ index }}</a></li>
-            {% endfor %}
+            {{ page_list }}
             <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
         </ul>
     </div>

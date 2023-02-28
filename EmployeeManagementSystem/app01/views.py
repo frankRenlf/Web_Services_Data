@@ -4,6 +4,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from app01 import models
+from django.utils.safestring import mark_safe
 
 """ create depart operations """
 
@@ -149,15 +150,18 @@ def pretty_list(request):
     if mobile_txt:
         data_dict["mobile__contains"] = mobile_txt
     # print(data_dict)
-    number_list = models.PrettyNumber.objects.filter(**data_dict).order_by("-level")[page_start: page_end]
-    data_size = math.ceil(len(models.PrettyNumber.objects.all())/page_size)
-    print(data_size)
-    pages = []
-    i = 1
-    while i <= data_size:
-        pages.append(i)
-        i += 1
-    return render(request, 'pretty_list.html', {"number_list": number_list, "page_size": pages})
+    data_list = models.PrettyNumber.objects.filter(**data_dict).order_by("-level")
+    number_list = data_list[page_start: page_end]
+    data_size = math.ceil(data_list.count() / page_size)
+    page_list = []
+    sub = 1
+    for i in range(max(page_index - sub, 1), min(page_index + sub, data_size) + 1):
+        if i == page_index:
+            page_list.append('<li class=active><a href="?index={}">{}</a></li>'.format(i, i))
+        else:
+            page_list.append('<li><a href="?index={}">{}</a></li>'.format(i, i))
+    page_str = mark_safe("".join(page_list))
+    return render(request, 'pretty_list.html', {"number_list": number_list, "page_list": page_str})
 
 
 def pretty_add(request):
