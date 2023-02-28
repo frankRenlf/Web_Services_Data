@@ -9,15 +9,15 @@ class Pagination(object):
         mobile_txt = request.GET.get(search)
         self.search = search
         self.mobile_txt = mobile_txt if mobile_txt is not None else ''
-        self.page_index = self.page_index
         self.page_size = page_size
+        self.total_page_nums = math.ceil(data_list.count() / page_size)
+        self.page_index = self.page_index if 0 < self.page_index <= self.total_page_nums else 1
 
         self.data_start = (self.page_index - 1) * page_size
         self.data_end = self.page_index * page_size
 
         self.number_list = data_list[self.data_start: self.data_end]
 
-        self.total_page_nums = math.ceil(data_list.count() / page_size)
         self.sub = sub
         self.page_list = []
         self.html()

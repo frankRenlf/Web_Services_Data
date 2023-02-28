@@ -147,11 +147,12 @@ def pretty_list(request):
     mobile_txt = mobile_txt if mobile_txt is not None else ''
     page_size = 3
     data_dict = {}
+    search = "mobile"
     if mobile_txt:
-        data_dict["mobile__contains"] = mobile_txt
+        data_dict[search + "__contains"] = mobile_txt
     data_list = models.PrettyNumber.objects.filter(**data_dict).order_by("-level")
     sub = 2
-    pagination = Pagination(request, data_list, "mobile", page_size, "index", sub)
+    pagination = Pagination(request, data_list, search, page_size, "index", sub)
 
     return render(request, 'pretty_list.html',
                   {"number_list": pagination.number_list, "page_list": pagination.page_list,
