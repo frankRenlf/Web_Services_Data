@@ -20,8 +20,9 @@ def home(request):
 
 def depart_list(request):
     depart_union = models.Department.objects.all()
+    pagination = Pagination(request, depart_union)
     return render(request, 'depart_list.html',
-                  {"depart_union": depart_union})
+                  {"depart_union": pagination.number_list, "page_list": pagination.page_list})
 
 
 def depart_add(request):

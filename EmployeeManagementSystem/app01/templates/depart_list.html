@@ -30,17 +30,20 @@
                 </thead>
                 <tbody>
                 {% for i in depart_union %}
-                    <tr>
-                        <th>{{ i.id }}</th>
-                        <td>{{ i.title }}</td>
-                        <td>
-                            <a href="/depart/{{ i.id }}/edit" class="btn btn-primary btn-xs">edit</a>
-                            <a href="/depart/delete?id={{ i.id }}" class="btn btn-primary btn-xs">delete</a>
-                        </td>
-                    </tr>
+                <tr>
+                    <th>{{ i.id }}</th>
+                    <td>{{ i.title }}</td>
+                    <td>
+                        <a href="/depart/{{ i.id }}/edit" class="btn btn-primary btn-xs">edit</a>
+                        <a href="/depart/delete?id={{ i.id }}" class="btn btn-primary btn-xs">delete</a>
+                    </td>
+                </tr>
                 {% endfor %}
                 </tbody>
             </table>
         </div>
+        <ul class="pagination">
+            {{ page_list }}
+        </ul>
     </div>
 {% endblock %}
