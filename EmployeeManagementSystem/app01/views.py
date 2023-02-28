@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
 from app01 import models
 from django.utils.safestring import mark_safe
+from utils.Pagination import Pagination
 
 """ create depart operations """
 
@@ -142,11 +143,13 @@ class PrettyModelForm(forms.ModelForm):
 
 def pretty_list(request):
     mobile_txt = request.GET.get("mobile")
-    page_index = int(request.GET.get('index', 1))
+    mobile_txt = mobile_txt if mobile_txt is not None else ''
+    page_index = int(request.GET.get('index', 1) if request.GET.get('index', 1) != '' else 1)
     page_size = 3
     data_start = (page_index - 1) * page_size
     data_end = page_index * page_size
     data_dict = {}
+
     if mobile_txt:
         data_dict["mobile__contains"] = mobile_txt
     # print(data_dict)
@@ -155,29 +158,43 @@ def pretty_list(request):
     data_size = math.ceil(data_list.count() / page_size)
     page_list = []
     sub = 2
+
+    pagination = Pagination(request, data_list, page_size, "index", sub)
+    
     first = max(page_index - sub, 1)
-    page_list.append('<li class=""><a href="?index={}&&mobile={}" aria-label="Previous">'
+
+    page_list.append('<li class=""><a href="?index={}&mobile={}" aria-label="Previous">'
                      '<span aria-hidden="true">First</span></a></li>'.format(1, mobile_txt))
     if page_index == 1:
         page_list.append('<li class="disabled"><a href="?mobile={}" aria-label="Previous">'
                          '<span aria-hidden="true">«</span></a></li>'.format(mobile_txt))
     else:
-        page_list.append('<li class=""><a href="?index={}&&mobile={}" aria-label="Previous">'
+        page_list.append('<li class=""><a href="?index={}&mobile={}" aria-label="Previous">'
                          '<span aria-hidden="true">«</span></a></li>'.format(page_index - 1, mobile_txt))
     end = min(page_index + sub, data_size)
     for i in range(first, end + 1):
         if i == page_index:
-            page_list.append('<li class=active><a href="?index={}&&mobile={}">{}</a></li>'.format(i, mobile_txt, i))
+            page_list.append('<li class=active><a href="?index={}&mobile={}">{}</a></li>'.format(i, mobile_txt, i))
         else:
-            page_list.append('<li><a href="?index={}&&mobile={}">{}</a></li>'.format(i, mobile_txt, i))
+            page_list.append('<li><a href="?index={}&mobile={}">{}</a></li>'.format(i, mobile_txt, i))
     if page_index == data_size:
-        page_list.append('<li class="disabled"><a href="?index={}&&mobile={}" aria-label="Next">'
+        page_list.append('<li class="disabled"><a href="?index={}&mobile={}" aria-label="Next">'
                          '<span aria-hidden="true">»</span></a></li>'.format(page_index, mobile_txt))
     else:
-        page_list.append('<li class=""><a href="?index={}&&mobile={}" aria-label="Next">'
+        page_list.append('<li class=""><a href="?index={}&mobile={}" aria-label="Next">'
                          '<span aria-hidden="true">»</span></a></li>'.format(page_index + 1, mobile_txt))
-    page_list.append('<li class=""><a href="?index={}&&mobile={}" aria-label="Previous">'
+    page_list.append('<li class=""><a href="?index={}&mobile={}" aria-label="Previous">'
                      '<span aria-hidden="true">End</span></a></li>'.format(data_size, mobile_txt))
+    page_list.append("""
+            <form method="get">
+            <div class="input-group" style="width: 200px">
+                <input type="text" name="index" class="form-control" placeholder="page number">
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">jump</button>
+            </span>
+            </div>
+        </form>
+        """)
     page_str = mark_safe("".join(page_list))
     return render(request, 'pretty_list.html',
                   {"number_list": number_list, "page_list": page_str,
