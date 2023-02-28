@@ -61,9 +61,9 @@
             </table>
         </div>
         <ul class="pagination">
-            <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+            <li><a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
             {% for index in page_size %}
-                <li><a href="/pretty/list?index={{ index }}">{{ index }}</a></li>
+                <li><a href="?index={{ index }}">{{ index }}</a></li>
             {% endfor %}
             <li><a href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
         </ul>
