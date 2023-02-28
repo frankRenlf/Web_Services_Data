@@ -156,7 +156,7 @@ def pretty_list(request):
 
     return render(request, 'pretty_list.html',
                   {"number_list": pagination.number_list, "page_list": pagination.page_list,
-                   "mobile": "" if pagination.mobile_txt is None else pagination.mobile_txt})
+                   "mobile": "" if pagination.search_query is None else pagination.search_query})
 
 
 def pretty_add(request):
