@@ -144,24 +144,40 @@ def pretty_list(request):
     mobile_txt = request.GET.get("mobile")
     page_index = int(request.GET.get('index', 1))
     page_size = 3
-    page_start = (page_index - 1) * page_size
-    page_end = page_index * page_size
+    data_start = (page_index - 1) * page_size
+    data_end = page_index * page_size
     data_dict = {}
     if mobile_txt:
         data_dict["mobile__contains"] = mobile_txt
     # print(data_dict)
     data_list = models.PrettyNumber.objects.filter(**data_dict).order_by("-level")
-    number_list = data_list[page_start: page_end]
+    number_list = data_list[data_start: data_end]
     data_size = math.ceil(data_list.count() / page_size)
     page_list = []
-    sub = 1
-    for i in range(max(page_index - sub, 1), min(page_index + sub, data_size) + 1):
+    sub = 2
+    first = max(page_index - sub, 1)
+    if page_index == 1:
+        page_list.append('<li class="disabled"><a href="#" aria-label="Previous">'
+                         '<span aria-hidden="true">«</span></a></li>')
+    else:
+        page_list.append('<li class=""><a href="?index={}" aria-label="Previous">'
+                         '<span aria-hidden="true">«</span></a></li>'.format(page_index - 1))
+    end = min(page_index + sub, data_size)
+    for i in range(first, end + 1):
         if i == page_index:
             page_list.append('<li class=active><a href="?index={}">{}</a></li>'.format(i, i))
         else:
             page_list.append('<li><a href="?index={}">{}</a></li>'.format(i, i))
+    if page_index == data_size:
+        page_list.append('<li class="disabled"><a href="#" aria-label="Next">'
+                         '<span aria-hidden="true">»</span></a></li>')
+    else:
+        page_list.append('<li class=""><a href="?index={}" aria-label="Next">'
+                         '<span aria-hidden="true">»</span></a></li>'.format(page_index + 1))
     page_str = mark_safe("".join(page_list))
-    return render(request, 'pretty_list.html', {"number_list": number_list, "page_list": page_str})
+    return render(request, 'pretty_list.html',
+                  {"number_list": number_list, "page_list": page_str,
+                   "mobile": "" if mobile_txt is None else mobile_txt})
 
 
 def pretty_add(request):
