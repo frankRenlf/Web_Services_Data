@@ -1,3 +1,5 @@
+import math
+
 from django import forms
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect
@@ -138,13 +140,23 @@ class PrettyModelForm(forms.ModelForm):
 
 
 def pretty_list(request):
-    sub = request.GET.get("mobile")
+    mobile_txt = request.GET.get("mobile")
+    page_index = int(request.GET.get('index', 1))
+    page_start = (page_index - 1) * 3
+    page_end = page_index * 3
     data_dict = {}
-    if sub:
-        data_dict["mobile__contains"] = sub
+    if mobile_txt:
+        data_dict["mobile__contains"] = mobile_txt
     # print(data_dict)
-    number_list = models.PrettyNumber.objects.filter(**data_dict).order_by("-level")
-    return render(request, 'pretty_list.html', {"number_list": number_list})
+    number_list = models.PrettyNumber.objects.filter(**data_dict).order_by("-level")[page_start: page_end]
+    page_size = math.ceil(len(models.PrettyNumber.objects.all())/3.0)
+    print(page_size)
+    pages = []
+    i = 1
+    while i <= page_size:
+        pages.append(i)
+        i += 1
+    return render(request, 'pretty_list.html', {"number_list": number_list, "page_size": pages})
 
 
 def pretty_add(request):
