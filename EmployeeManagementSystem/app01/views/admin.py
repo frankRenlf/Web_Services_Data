@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from app01 import models
 from app01.utils.Pagination import Pagination
-from app01.modelForms.AdminModelForm import AdminModelForm
+from app01.modelForms.AdminModelForm import AdminModelForm, AdminResetModelForm
 
 
 def admin_list(request):
@@ -51,5 +51,15 @@ def admin_delete(request, aid):
     return redirect('/admin/list')
 
 
-def admin_reset(request):
-    return None
+def admin_reset(request, aid):
+    admin = models.Admin.objects.filter(id=aid).first()
+    if not admin:
+        return redirect('/admin/list')
+    if request.method == "GET":
+        admin_null = AdminResetModelForm(instance=admin)
+        return render(request, 'template.html', {"form": admin_null, "title": "reset " + admin.name})
+    admin_form = AdminResetModelForm(data=request.POST, instance=admin)
+    if admin_form.is_valid():
+        admin_form.save()
+        return redirect('/admin/list')
+    return render(request, 'template.html', {"form": admin_form, "title": "reset " + admin.name})

@@ -28,3 +28,30 @@ class AdminModelForm(BootstrapModelForm):
     def clean_password(self):
         pwd = self.cleaned_data.get("password")
         return md5(pwd)
+
+
+class AdminResetModelForm(BootstrapModelForm):
+    confirm_password = forms.CharField(
+        label="confirm password",
+        widget=forms.PasswordInput
+    )
+
+    class Meta:
+        model = models.Admin
+        fields = ["password"]
+        widgets = {
+            "password": forms.PasswordInput
+        }
+
+    def clean_confirm_password(self):
+        pwd = self.cleaned_data.get("password")
+        confirm = md5(self.cleaned_data.get("confirm_password"))
+        if pwd != confirm:
+            raise ValidationError("password not same")
+        return confirm
+
+    def clean_password(self):
+        pwd = self.cleaned_data.get("password")
+        if self.instance.password == md5(pwd):
+            raise ValidationError("same with former password")
+        return md5(pwd)
