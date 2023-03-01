@@ -34,6 +34,8 @@ def admin_add(request):
 
 def admin_edit(request, aid):
     admin = models.Admin.objects.filter(id=aid).first()
+    if not admin:
+        return redirect('/admin/list')
     if request.method == "GET":
         admin_null = AdminModelForm(instance=admin)
         return render(request, 'template.html', {"form": admin_null, "title": "edit admin"})
