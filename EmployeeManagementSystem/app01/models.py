@@ -1,6 +1,11 @@
 from django.db import models
 
 
+class Admin(models.Model):
+    name = models.CharField(max_length=32)
+    password = models.CharField(max_length=64)
+
+
 # Create your models here.
 class Department(models.Model):
     title = models.CharField(max_length=32)
