@@ -45,4 +45,5 @@ urlpatterns = [
     path('admin/add', admin.admin_add),
     path('admin/<int:aid>/edit', admin.admin_edit),
     path('admin/<int:aid>/delete', admin.admin_delete),
+    path('admin/<int:aid>/reset', admin.admin_reset),
 ]

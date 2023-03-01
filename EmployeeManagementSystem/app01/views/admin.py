@@ -49,3 +49,7 @@ def admin_edit(request, aid):
 def admin_delete(request, aid):
     models.Admin.objects.filter(id=aid).first().delete()
     return redirect('/admin/list')
+
+
+def admin_reset(request):
+    return None

@@ -47,8 +47,11 @@
                     <tr>
                         <th>{{ i.id }}</th>
                         <td>{{ i.name }}</td>
-                        <td>{{ i.password }}</td>
                         <td>
+                            {{ i.password }}
+                        </td>
+                        <td>
+                            <a href="/admin/{{ i.id }}/reset" class="btn btn-primary btn-xs">reset</a>
                             <a href="/admin/{{ i.id }}/edit" class="btn btn-primary btn-xs">edit</a>
                             <a href="/admin/{{ i.id }}/delete" class="btn btn-primary btn-xs">delete</a>
                         </td>
