@@ -19,6 +19,7 @@ from app01 import viewsHome
 from app01.views import depart
 from app01.views import user
 from app01.views import pretty
+from app01.views import admin
 
 urlpatterns = [
     # home
@@ -39,4 +40,6 @@ urlpatterns = [
     path('pretty/add', pretty.pretty_add),
     path('pretty/<int:pid>/delete', pretty.pretty_delete),
     path('pretty/<int:pid>/edit', pretty.pretty_edit),
+    # admin
+    path('admin/list', admin.admin_list)
 ]
