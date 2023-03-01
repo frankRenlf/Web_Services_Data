@@ -19,3 +19,31 @@ def admin_list(request):
     return render(request, 'admin_list.html',
                   {"number_list": pagination.number_list, "page_list": pagination.page_list,
                    search: "" if pagination.search_query is None else pagination.search_query})
+
+
+def admin_add(request):
+    if request.method == "GET":
+        admin_null = AdminModelForm()
+        return render(request, 'template.html', {"form": admin_null, "title": "create admin"})
+    admin_form = AdminModelForm(data=request.POST)
+    if admin_form.is_valid():
+        admin_form.save()
+        return redirect('/admin/list')
+    return render(request, 'template.html', {"form": admin_form, "title": "create admin"})
+
+
+def admin_edit(request, aid):
+    admin = models.Admin.objects.filter(id=aid).first()
+    if request.method == "GET":
+        admin_null = AdminModelForm(instance=admin)
+        return render(request, 'template.html', {"form": admin_null, "title": "edit admin"})
+    admin_form = AdminModelForm(data=request.POST, instance=admin)
+    if admin_form.is_valid():
+        admin_form.save()
+        return redirect('/admin/list')
+    return render(request, 'template.html', {"form": admin_form, "title": "edit admin"})
+
+
+def admin_delete(request, aid):
+    models.Admin.objects.filter(id=aid).first().delete()
+    return redirect('/admin/list')

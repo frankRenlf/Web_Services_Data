@@ -41,5 +41,8 @@ urlpatterns = [
     path('pretty/<int:pid>/delete', pretty.pretty_delete),
     path('pretty/<int:pid>/edit', pretty.pretty_edit),
     # admin
-    path('admin/list', admin.admin_list)
+    path('admin/list', admin.admin_list),
+    path('admin/add', admin.admin_add),
+    path('admin/<int:aid>/edit', admin.admin_edit),
+    path('admin/<int:aid>/delete', admin.admin_delete),
 ]
