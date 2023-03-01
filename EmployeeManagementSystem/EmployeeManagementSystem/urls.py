@@ -15,25 +15,28 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app01 import views
+from app01 import viewsHome
+from app01.views import depart
+from app01.views import user
+from app01.views import pretty
 
 urlpatterns = [
     # home
-    path('', views.home),
+    path('', viewsHome.home),
     # depart
-    path('depart/list', views.depart_list),
-    path('depart/add', views.depart_add),
-    path('depart/delete', views.depart_delete),
-    path('depart/<int:did>/edit', views.depart_edit),
+    path('depart/list', depart.depart_list),
+    path('depart/add', depart.depart_add),
+    path('depart/delete', depart.depart_delete),
+    path('depart/<int:did>/edit', depart.depart_edit),
     # user
-    path('user/list', views.user_list),
-    path('user/add', views.user_add),
-    path('user/modelForm/add', views.user_modelform_add),
-    path('user/delete', views.user_delete),
-    path('user/<int:uid>/edit', views.user_modelform_edit),
+    path('user/list', user.user_list),
+    path('user/add', user.user_add),
+    path('user/modelForm/add', user.user_modelform_add),
+    path('user/delete', user.user_delete),
+    path('user/<int:uid>/edit', user.user_modelform_edit),
     # pretty
-    path('pretty/list', views.pretty_list),
-    path('pretty/add', views.pretty_add),
-    path('pretty/<int:pid>/delete', views.pretty_delete),
-    path('pretty/<int:pid>/edit', views.pretty_edit),
+    path('pretty/list', pretty.pretty_list),
+    path('pretty/add', pretty.pretty_add),
+    path('pretty/<int:pid>/delete', pretty.pretty_delete),
+    path('pretty/<int:pid>/edit', pretty.pretty_edit),
 ]
