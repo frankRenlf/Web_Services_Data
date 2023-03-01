@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1-dist/css/bootstrap.min.css' %}">
+    {% block css %}{% endblock %}
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -54,5 +55,6 @@
 </div>
 <script src="{% static 'js/jquery.js' %}"></script>
 <script src="{% static 'plugins/bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+{% block js %}{% endblock %}
 </body>
 </html>
