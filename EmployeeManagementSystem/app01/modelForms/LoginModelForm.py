@@ -6,12 +6,18 @@ from app01.utils.encrypy import md5
 
 
 class LoginModelForm(BootstrapModelForm):
+    code = forms.CharField(
+        label="code",
+        widget=forms.TextInput,
+        required=True
+    )
+
     class Meta:
         model = models.Admin
         fields = ["name", "password"]
         widgets = {
             "name": forms.TextInput,
-            "password": forms.PasswordInput
+            "password": forms.PasswordInput,
         }
 
     def clean_password(self):
@@ -19,3 +25,6 @@ class LoginModelForm(BootstrapModelForm):
         if self.instance.password != md5(pwd):
             raise ValidationError("wrong input")
         return md5(pwd)
+
+
+    # def clean_code(self):
