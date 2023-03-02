@@ -1,0 +1,1 @@
+from django.middleware.common import CommonMiddleware
