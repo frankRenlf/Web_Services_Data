@@ -20,6 +20,7 @@ from app01.views import depart
 from app01.views import user
 from app01.views import pretty
 from app01.views import admin
+from app01.views import account
 
 urlpatterns = [
     # home
@@ -46,4 +47,6 @@ urlpatterns = [
     path('admin/<int:aid>/edit', admin.admin_edit),
     path('admin/<int:aid>/delete', admin.admin_delete),
     path('admin/<int:aid>/reset', admin.admin_reset),
+    # account
+    path('account/login', account.login),
 ]
