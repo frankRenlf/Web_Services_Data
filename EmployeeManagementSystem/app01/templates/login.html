@@ -39,6 +39,19 @@
                 <span style="color: red">{{ field.errors.0 }}</span>
             </div>
         {% endfor %}
+        <div class="form-group">
+            <label for="id_code">图片验证码</label>
+            <div class="row">
+                <div class="col-xs-7">
+                    <input type="text" name="code" class="form-control" placeholder="请输入图片验证码" required=""
+                           id="id_code">
+                    <span style="color: red;"></span>
+                </div>
+                <div class="col-xs-5">
+                    <img id="image_code" src="/image/code/">
+                </div>
+            </div>
+        </div>
         <input type="submit" class="btn btn-primary" value="login">
     </form>
 </div>
