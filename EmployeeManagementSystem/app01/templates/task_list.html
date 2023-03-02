@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="container">
+        <input type="button" value="btn" onclick="clickTap()">
+    </div>
+
+{% endblock %}
+{% block js %}
+    <script>
+        function clickTap() {
+            $.ajax({
+                url: '/task/ajax',
+                method: 'post',
+                data: {
+                    n1: 1,
+                    n2: 2,
+                },
+                {#contentType: 'application/json',#}
+                success(res) {
+                    console.log(res)
+                }
+            })
+        }
+    </script>
+{% endblock %}

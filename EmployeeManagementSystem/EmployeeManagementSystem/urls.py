@@ -21,6 +21,7 @@ from app01.views import user
 from app01.views import pretty
 from app01.views import admin
 from app01.views import account
+from app01.views import task
 
 urlpatterns = [
     # home
@@ -52,4 +53,7 @@ urlpatterns = [
     path('logout', account.logout),
     # code picture
     path('image/code', account.img_code),
+    # task
+    path('task/ajax', task.task_ajax),
+    path('task/list', task.task_list),
 ]
