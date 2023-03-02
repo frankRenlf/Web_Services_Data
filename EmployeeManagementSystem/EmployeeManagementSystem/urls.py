@@ -48,5 +48,5 @@ urlpatterns = [
     path('admin/<int:aid>/delete', admin.admin_delete),
     path('admin/<int:aid>/reset', admin.admin_reset),
     # account
-    path('account/login', account.login),
+    path('login', account.login),
 ]
