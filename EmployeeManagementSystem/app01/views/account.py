@@ -11,7 +11,7 @@ def login(request):
     form = LoginModelForm(data=request.POST, instance=admin)
     if form.is_valid():
         request.session["info"] = {"id": admin.id, "name": admin.name}
-        print(request.session)
+        print(request.session.get("info"))
         return redirect('/admin/list')
     return render(request, 'login.html', {"form": form})
 
