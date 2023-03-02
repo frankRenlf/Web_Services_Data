@@ -18,8 +18,9 @@ def login(request):
         if code != form.cleaned_data.pop("code"):
             form.add_error("code", "invalid code")
             return render(request, 'login.html', {"form": form})
+        request.session.clear()
         request.session["info"] = {"id": admin.id, "name": admin.name}
-        request.session.set_expiry(60)
+        request.session.set_expiry(60 * 60 * 3)
         return redirect('/admin/list')
     return render(request, 'login.html', {"form": form})
 
