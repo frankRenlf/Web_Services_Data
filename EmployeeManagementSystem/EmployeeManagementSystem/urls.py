@@ -50,4 +50,6 @@ urlpatterns = [
     # account
     path('login', account.login),
     path('logout', account.logout),
+    # code picture
+    path('image/code', account.img_code),
 ]

@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from app01 import models
 from app01.modelForms.LoginModelForm import LoginModelForm
+from app01.utils.generatePillow import check_code
+from io import BytesIO
 
 
 def login(request):
@@ -19,3 +21,14 @@ def login(request):
 def logout(request):
     request.session.clear()
     return redirect('/login')
+
+
+def img_code(request):
+    img, code_str = check_code()
+    
+    request.session['img_code'] = code_str
+    request.session.set_expiry(60)
+    stream = BytesIO()
+
+    img.save(stream, 'png')
+    return HttpResponse(stream.getvalue())
