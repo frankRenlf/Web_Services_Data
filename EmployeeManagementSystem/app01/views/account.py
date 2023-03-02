@@ -19,6 +19,7 @@ def login(request):
             form.add_error("code", "invalid code")
             return render(request, 'login.html', {"form": form})
         request.session["info"] = {"id": admin.id, "name": admin.name}
+        request.session.set_expiry(60)
         return redirect('/admin/list')
     return render(request, 'login.html', {"form": form})
 
