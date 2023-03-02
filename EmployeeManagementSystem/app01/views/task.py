@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -8,4 +9,8 @@ def task_list(request):
 
 @csrf_exempt
 def task_ajax(request):
-    return HttpResponse("success")
+    obj1 = request.POST
+    obj2 = request.GET
+    print(obj1)
+    print(obj2)
+    return JsonResponse({"success": "1"})

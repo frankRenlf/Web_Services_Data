@@ -1,24 +1,53 @@
 {% extends 'layout.html' %}
 {% block content %}
     <div class="container">
-        <input type="button" value="btn" onclick="clickTap()">
+        <input id="btn1" type="button" value="btn1">
+        <input id="txt" type="text" value="">
+        <input id="pwd" type="text" value="">
+        <input id="btn2" type="button" value="btn2">
     </div>
 
 {% endblock %}
 {% block js %}
     <script>
-        function clickTap() {
-            $.ajax({
-                url: '/task/ajax',
-                method: 'post',
-                data: {
-                    n1: 1,
-                    n2: 2,
-                },
-                {#contentType: 'application/json',#}
-                success(res) {
-                    console.log(res)
-                }
+        $(function () {
+            addbtn1()
+            addbtn2()
+        })
+
+        function addbtn1() {
+            $('#btn1').click(function () {
+                $.ajax({
+                    url: '/task/ajax',
+                    method: 'post',
+                    data: {
+                        n1: 1,
+                        n2: 2,
+                    },
+                    contentType: 'application/json',
+                    dataType: "JSON",
+                    success(res) {
+                        console.log(res.success)
+                    }
+                })
+            })
+        }
+
+        function addbtn2() {
+            $('#btn2').click(function () {
+                $.ajax({
+                    url: '/task/ajax',
+                    method: 'post',
+                    data: {
+                        n1: $('#txt').val(),
+                        n2: $('#pwd').val(),
+                    },
+                    {#contentType: 'application/json',#}
+                    dataType: "JSON",
+                    success(res) {
+                        console.log(res.success)
+                    }
+                })
             })
         }
     </script>
