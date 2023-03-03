@@ -56,4 +56,4 @@ class Order(models.Model):
         (0, "Unpaid")
     )
     status = models.SmallIntegerField(choices=status_choices, default=1)
-    user = models.ForeignKey(to="UserInfo", to_fields="id", null=True, blank=True, on_delete=models.SET_NULL)
+    user = models.ForeignKey(to="UserInfo", to_field="id", null=True, blank=True, on_delete=models.SET_NULL)
