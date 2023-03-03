@@ -2,8 +2,7 @@
 {% block content %}
     <div class="container">
         <div>
-            <input id="add" type="button" value="new order" class="btn btn-primary"
-                   data-toggle="modal" data-target="#myModal">
+            <input id="add" type="button" value="new order" class="btn btn-primary">
         </div>
     </div>
     <!-- Modal -->
@@ -33,7 +32,7 @@
         })
         function bindBtnEvent(){
             $("#add").click(function (){
-                
+                $('#myModal').modal('show')
             })
         }
     </script>
