@@ -16,12 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app01 import viewsHome
-from app01.views import depart
-from app01.views import user
-from app01.views import pretty
-from app01.views import admin
-from app01.views import account
-from app01.views import task
+from app01.views import depart, user, pretty, admin, account, task, order
 
 urlpatterns = [
     # home
@@ -56,4 +51,6 @@ urlpatterns = [
     # task
     path('task/ajax', task.task_ajax),
     path('task/list', task.task_list),
+    # order
+    path('order/list', order.order_list)
 ]
