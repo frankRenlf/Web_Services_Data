@@ -29,17 +29,18 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 {#                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>#}
-                <li><a href="/depart/list">department manage</a></li>
-                <li><a href="/user/list">user manage</a></li>
-                <li><a href="/pretty/list">prettyNumber manage</a></li>
-                <li><a href="/admin/list">admin manage</a></li>
-                <li><a href="/task/list">task manage</a></li>
+                <li><a href="/depart/list">Department </a></li>
+                <li><a href="/user/list">User </a></li>
+                <li><a href="/pretty/list">PrettyNumber </a></li>
+                <li><a href="/admin/list">Admin </a></li>
+                <li><a href="/task/list">Task </a></li>
+                <li><a href="/order/list">Order</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/login">login</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Dropdown <span class="caret"></span></a>
+                       aria-expanded="false">{{ request.session.info.name }} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">{{ request.session.info.name }} info</a></li>
                         <li><a href="#">Another action</a></li>
