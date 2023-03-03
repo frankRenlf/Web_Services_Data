@@ -45,3 +45,15 @@ class PrettyNumber(models.Model):
     )
     level = models.SmallIntegerField(choices=level_choices, default=1)
     status = models.SmallIntegerField(choices=status_choices, default=1)
+
+
+class Order(models.Model):
+    OrderNumber = models.CharField(max_length=64)
+    title = models.CharField(max_length=32)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+    status_choices = (
+        (1, "Paid"),
+        (0, "Unpaid")
+    )
+    status = models.SmallIntegerField(choices=status_choices, default=1)
+    user = models.ForeignKey(to="UserInfo", to_fields="id", null=True, blank=True, on_delete=models.SET_NULL)

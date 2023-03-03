@@ -26,5 +26,4 @@ class LoginModelForm(BootstrapModelForm):
             raise ValidationError("wrong input")
         return md5(pwd)
 
-
     # def clean_code(self):
