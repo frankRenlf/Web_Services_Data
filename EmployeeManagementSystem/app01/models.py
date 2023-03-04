@@ -5,6 +5,9 @@ class Admin(models.Model):
     name = models.CharField(max_length=32)
     password = models.CharField(max_length=64)
 
+    def __str__(self):
+        return self.name
+
 
 # Create your models here.
 class Department(models.Model):
@@ -51,7 +54,7 @@ class PrettyNumber(models.Model):
 
 
 class Order(models.Model):
-    OrderNumber = models.CharField(max_length=64)
+    number = models.CharField(max_length=64)
     title = models.CharField(max_length=32)
     price = models.DecimalField(max_digits=10, decimal_places=3)
     status_choices = (
@@ -59,4 +62,4 @@ class Order(models.Model):
         (0, "Unpaid")
     )
     status = models.SmallIntegerField(choices=status_choices, default=0)
-    user = models.ForeignKey(to="UserInfo", to_field="id", on_delete=models.CASCADE)
+    admin = models.ForeignKey(to="Admin", to_field="id", on_delete=models.CASCADE)

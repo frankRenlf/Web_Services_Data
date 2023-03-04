@@ -1,9 +1,70 @@
 {% extends 'layout.html' %}
 {% block content %}
     <div class="container">
-        <div>
-            <input id="add" type="button" value="new order" class="btn btn-primary">
+        <div style="margin-bottom: 10px" class="clearfix">
+            <div>
+                <input id="add" type="button" value="new order" class="btn btn-primary">
+            </div>
+            <div style="float: right; width: 300px">
+                <form method="get">
+                    <div class="input-group">
+                        <input type="text" name="title" class="form-control" placeholder="Search for..."
+                               value="{{ search }}">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </button>
+                        </span>
+                    </div><!-- /input-group -->
+                </form>
+            </div>
         </div>
+            <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                Order List
+            </div>
+            <div class="panel-body">
+                <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum
+                    nulla sed consectetur. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis
+                    vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            </div>
+
+            <!-- Table -->
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NUMBER</th>
+                    <th>TITLE</th>
+                    <th>PRICE</th>
+                    <th>STATUS</th>
+                    <th>ADMIN_ID</th>
+                    <th>OPERATION</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in number_list %}
+                    <tr>
+                        <th>{{ i.id }}</th>
+                        <td>{{ i.number }}</td>
+                        <td>{{ i.title }}</td>
+                        <td>{{ i.price }}</td>
+                        <td>{{ i.get_status_display }}</td>
+                        <td>{{ i.admin_id }}</td>
+                        <td>
+                            <a href="/order/{{ i.id }}/edit" class="btn btn-primary btn-xs">edit</a>
+                            <a href="/order/{{ i.id }}/delete" class="btn btn-primary btn-xs">delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <ul class="pagination">
+            {{ page_list }}
+        </ul>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -56,11 +117,13 @@
                 $.ajax({
                     url: '/order/add',
                     type: 'post',
-                    data: $('#formAdd').serialize(),
+                    data: $("#formAdd").serialize(),
                     dataType: 'JSON',
                     success(res) {
                         if (res.status) {
                             alert("add success")
+                            $('#formAdd')[0].reset()
+                            $('#myModal').modal('hide')
                         } else {
                             $.each(res.error, function (name, errorList) {
                                 $('#id_' + name).next().text(errorList[0])

@@ -20,7 +20,7 @@ def login(request):
             return render(request, 'login.html', {"form": form})
         request.session.clear()
         request.session["info"] = {"id": admin.id, "name": admin.name}
-        request.session.set_expiry(60 * 60 * 3)
+        request.session.set_expiry(60 * 60 * 24)
         return redirect('/admin/list')
     return render(request, 'login.html', {"form": form})
 
