@@ -56,7 +56,7 @@ class PrettyNumber(models.Model):
 class Order(models.Model):
     number = models.CharField(max_length=64)
     title = models.CharField(max_length=32)
-    price = models.DecimalField(max_digits=10, decimal_places=3)
+    price = models.DecimalField(max_digits=10, decimal_places=1)
     status_choices = (
         (1, "Paid"),
         (0, "Unpaid")
