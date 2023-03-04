@@ -33,9 +33,9 @@ def order_list(request):
 def order_add(request):
     form = OrderModelForm(data=request.POST)
     if form.is_valid():
-        form.instance.number = str(form.instance.admin_id) + "_" + datetime.now().strftime("%Y%m%d%H%S") + "_" + \
-                               str(random.randint(1000, 9999))
         form.instance.admin_id = request.session.get("info")["id"]
+        form.instance.number = str(form.instance.admin_id) + "_" + datetime.now().strftime("%Y%m%d%H%S") + "_" + str(
+            random.randint(1000, 9999))
         form.save()
         return JsonResponse({"status": True})
     return JsonResponse({"status": False, "error": form.errors})
