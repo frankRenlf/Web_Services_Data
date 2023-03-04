@@ -52,7 +52,7 @@
                         <td>{{ i.title }}</td>
                         <td>{{ i.price }}</td>
                         <td>{{ i.get_status_display }}</td>
-                        <td>{{ i.admin_id }}</td>
+                        <td>{{ i.admin.name }}</td>
                         <td>
                             <a href="/order/{{ i.id }}/edit" class="btn btn-primary btn-xs">edit</a>
                             <a href="/order/{{ i.id }}/delete" class="btn btn-primary btn-xs">delete</a>
@@ -124,6 +124,7 @@
                             alert("add success")
                             $('#formAdd')[0].reset()
                             $('#myModal').modal('hide')
+                            location.reload()
                         } else {
                             $.each(res.error, function (name, errorList) {
                                 $('#id_' + name).next().text(errorList[0])

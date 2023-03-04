@@ -19,7 +19,7 @@ def order_list(request):
     search = "title"
     if search_txt:
         data_dict[search + "__contains"] = search_txt
-    data_list = models.Order.objects.filter(**data_dict)
+    data_list = models.Order.objects.filter(**data_dict).order_by("-id")
     sub = 2
     pagination = Pagination(request, data_list, search, page_size, "index", sub)
 
@@ -34,7 +34,7 @@ def order_add(request):
     form = OrderModelForm(data=request.POST)
     if form.is_valid():
         form.instance.admin_id = request.session.get("info")["id"]
-        form.instance.number = str(form.instance.admin_id) + "_" + datetime.now().strftime("%Y%m%d%H%S") + "_" + str(
+        form.instance.number = datetime.now().strftime("%Y%m%d%H%S") + "_" + str(
             random.randint(1000, 9999))
         form.save()
         return JsonResponse({"status": True})
