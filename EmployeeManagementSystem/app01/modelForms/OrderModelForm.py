@@ -6,4 +6,4 @@ from django.core.exceptions import ValidationError
 class OrderModelForm(BootstrapModelForm):
     class Meta:
         model = models.Order
-        fields = ["OrderNumber", "title", "price", "status", "user"]
+        fields = "__all__"
