@@ -54,5 +54,5 @@ urlpatterns = [
     # order
     path('order/list', order.order_list),
     path('order/add', order.order_add),
-    path('order/<int:oid>/delete', order.order_delete),
+    path('order/delete', order.order_delete),
 ]

@@ -41,6 +41,10 @@ def order_add(request):
     return JsonResponse({"status": False, "error": form.errors})
 
 
-def order_delete(request, oid):
+def order_delete(request):
+    oid = request.GET.get("oid")
+    exist = models.Order.objects.filter(id=oid).exists()
+    if not exist:
+        return JsonResponse({"status": False, "error": "not found"})
     models.Order.objects.filter(id=oid).first().delete()
-    return redirect('/order/list')
+    return JsonResponse({"status": True})

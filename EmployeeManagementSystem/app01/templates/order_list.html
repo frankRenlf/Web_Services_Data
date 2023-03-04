@@ -46,7 +46,7 @@
                 </thead>
                 <tbody>
                 {% for i in number_list %}
-                    <tr>
+                    <tr oid="{{ i.id }}">
                         <th>{{ i.id }}</th>
                         <td>{{ i.number }}</td>
                         <td>{{ i.title }}</td>
@@ -55,7 +55,8 @@
                         <td>{{ i.admin.name }}</td>
                         <td>
                             <a href="/order/{{ i.id }}/edit" class="btn btn-primary btn-xs">edit</a>
-                            <input type="button" class="btn btn-primary btn-xs btn-delete" value="delete">
+                            <input oid="{{ i.id }}" type="button" class="btn btn-primary btn-xs btn-delete"
+                                   value="delete">
                         </td>
                     </tr>
                 {% endfor %}
@@ -114,6 +115,7 @@
 {% endblock %}
 {% block js %}
     <script>
+        let oid;
         $(function () {
             bindNewEvent()
             bindSaveEvent()
@@ -157,12 +159,28 @@
         function bindDeleteEvent() {
             $(".btn-delete").click(function () {
                 $('#myDelete').modal('show')
+                oid = $(this).attr("oid")
+                console.log(oid)
             })
         }
 
         function bindConfirmEvent() {
             $(".btnConfirm").click(function () {
-                alert("1")
+                $.ajax({
+                    url: "/order/delete",
+                    type: "GET",
+                    data: {oid},
+                    dataType: "JSON",
+                    success(res) {
+                        if(res.status){
+                            $('#myDelete').modal('hide')
+                            location.reload()
+                            oid = 0
+                        }else {
+                            alert(res.error)
+                        }
+                    }
+                })
             })
         }
     </script>
