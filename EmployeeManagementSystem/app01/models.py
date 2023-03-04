@@ -30,6 +30,9 @@ class UserInfo(models.Model):
     # remove depart_id
     depart = models.ForeignKey(to="Department", to_field="id", null=True, blank=True, on_delete=models.SET_NULL)
 
+    def __str__(self):
+        return self.name
+
 
 class PrettyNumber(models.Model):
     mobile = models.CharField(max_length=11)

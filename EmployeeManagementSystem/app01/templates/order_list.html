@@ -12,10 +12,10 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Model title</h4>
+                    <h4 class="modal-title" id="myModalLabel">New Order</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="" id="btnAdd">
+                    <form action="" id="formAdd">
                         <div class="clearfix">
                             {% csrf_token %}
                             {% for field in form %}
@@ -27,15 +27,12 @@
                                     </div>
                                 </div>
                             {% endfor %}
-                            <div class="col-xs-12">
-                                <button id="btnAdd" type="button" class="btn btn-primary">submit</button>
-                            </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary" id="btnSave">Save</button>
                 </div>
             </div>
         </div>
@@ -44,12 +41,19 @@
 {% block js %}
     <script>
         $(function () {
-            bindBtnEvent()
+            bindNewEvent()
+            bindSubmitEvent()
         })
 
-        function bindBtnEvent() {
+        function bindNewEvent() {
             $("#add").click(function () {
                 $('#myModal').modal('show')
+            })
+        }
+
+        function bindSubmitEvent() {
+            $("#btnSave").click(function () {
+
             })
         }
     </script>
