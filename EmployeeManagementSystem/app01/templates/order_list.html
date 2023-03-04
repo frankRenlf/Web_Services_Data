@@ -105,8 +105,8 @@
                 <h4>Confirm delete</h4>
                 <p>If yes, it cannot be recalled</p>
                 <p style="text-align: right">
-                    <button type="button" class="btn btn-danger">Take this action</button>
-                    <button type="button" class="btn btn-default">Or do recall</button>
+                    <button type="button" class="btn btn-danger btnConfirm">Take this action</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Or do recall</button>
                 </p>
             </div>
         </div>
@@ -118,6 +118,7 @@
             bindNewEvent()
             bindSaveEvent()
             bindDeleteEvent()
+            bindConfirmEvent()
         })
 
         function bindNewEvent() {
@@ -156,6 +157,12 @@
         function bindDeleteEvent() {
             $(".btn-delete").click(function () {
                 $('#myDelete').modal('show')
+            })
+        }
+
+        function bindConfirmEvent() {
+            $(".btnConfirm").click(function () {
+                alert("1")
             })
         }
     </script>
