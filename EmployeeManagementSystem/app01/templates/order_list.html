@@ -17,13 +17,12 @@
                 <div class="modal-body">
                     <form action="" id="formAdd">
                         <div class="clearfix">
-                            {% csrf_token %}
                             {% for field in form %}
                                 <div class="col-xs-6">
                                     <div class="form-group">
                                         <label>{{ field.label }}</label>
                                         {{ field }}
-                                        <span style="color: red">{{ field.errors.0 }}</span>
+                                        <span style="color: red" class="error-msg"></span>
                                     </div>
                                 </div>
                             {% endfor %}
@@ -42,7 +41,7 @@
     <script>
         $(function () {
             bindNewEvent()
-            bindSubmitEvent()
+            bindSaveEvent()
         })
 
         function bindNewEvent() {
@@ -51,9 +50,27 @@
             })
         }
 
-        function bindSubmitEvent() {
+        function bindSaveEvent() {
             $("#btnSave").click(function () {
-
+                $('.error-msg').empty()
+                $.ajax({
+                    url: '/order/add',
+                    type: 'post',
+                    data: $('#formAdd').serialize(),
+                    dataType: 'JSON',
+                    success(res) {
+                        if (res.status) {
+                            alert("add success")
+                        } else {
+                            $.each(res.error, function (name, errorList) {
+                                $('#id_' + name).next().text(errorList[0])
+                            })
+                        }
+                    },
+                    error(res) {
+                        alert(res.error)
+                    }
+                })
             })
         }
     </script>

@@ -52,5 +52,6 @@ urlpatterns = [
     path('task/ajax', task.task_ajax),
     path('task/list', task.task_list),
     # order
-    path('order/list', order.order_list)
+    path('order/list', order.order_list),
+    path('order/add', order.order_add),
 ]

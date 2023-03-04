@@ -53,10 +53,10 @@ class PrettyNumber(models.Model):
 class Order(models.Model):
     OrderNumber = models.CharField(max_length=64)
     title = models.CharField(max_length=32)
-    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+    price = models.DecimalField(max_digits=10, decimal_places=3)
     status_choices = (
         (1, "Paid"),
         (0, "Unpaid")
     )
-    status = models.SmallIntegerField(choices=status_choices, default=1)
-    user = models.ForeignKey(to="UserInfo", to_field="id", null=True, blank=True, on_delete=models.SET_NULL)
+    status = models.SmallIntegerField(choices=status_choices, default=0)
+    user = models.ForeignKey(to="UserInfo", to_field="id", on_delete=models.CASCADE)
