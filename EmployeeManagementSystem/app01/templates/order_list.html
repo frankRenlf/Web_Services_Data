@@ -116,6 +116,7 @@
 {% block js %}
     <script>
         let oid;
+        let is_edit;
         $(function () {
             bindNewEvent()
             bindSaveEvent()
@@ -132,33 +133,58 @@
                 $('#formAdd')[0].reset()
                 $('#myModalLabel').text('new order')
                 $('#myModal').modal('show')
+                is_edit = false
             })
         }
 
         function bindSaveEvent() {
             $("#btnSave").click(function () {
                 $('.error-msg').empty()
-                $.ajax({
-                    url: '/order/add',
-                    type: 'post',
-                    data: $("#formAdd").serialize(),
-                    dataType: 'JSON',
-                    success(res) {
-                        if (res.status) {
-                            alert("add success")
-                            $('#formAdd')[0].reset()
-                            $('#myModal').modal('hide')
-                            location.reload()
-                        } else {
-                            $.each(res.error, function (name, errorList) {
-                                $('#id_' + name).next().text(errorList[0])
-                            })
+                if (!is_edit) {
+                    $.ajax({
+                        url: '/order/add',
+                        type: 'post',
+                        data: $("#formAdd").serialize(),
+                        dataType: 'JSON',
+                        success(res) {
+                            if (res.status) {
+                                alert("add success")
+                                $('#formAdd')[0].reset()
+                                $('#myModal').modal('hide')
+                                location.reload()
+                            } else {
+                                $.each(res.error, function (name, errorList) {
+                                    $('#id_' + name).next().text(errorList[0])
+                                })
+                            }
+                        },
+                        error(res) {
+                            alert(res.error)
                         }
-                    },
-                    error(res) {
-                        alert(res.error)
-                    }
-                })
+                    })
+                } else {
+                    $.ajax({
+                        url: '/order/edit/' + oid,
+                        type: 'post',
+                        data: $("#formAdd").serialize(),
+                        dataType: 'JSON',
+                        success(res) {
+                            if (res.status) {
+                                alert("edit success")
+                                $('#formAdd')[0].reset()
+                                $('#myModal').modal('hide')
+                                location.reload()
+                            } else {
+                                $.each(res.error, function (name, errorList) {
+                                    $('#id_' + name).next().text(errorList[0])
+                                })
+                            }
+                        },
+                        error(res) {
+                            alert(res.error)
+                        }
+                    })
+                }
             })
         }
 
@@ -205,6 +231,7 @@
                                 $('#id_' + k).val(v)
                             })
                             $("#myModal").modal('show')
+                            is_edit = true
                         } else {
                             alert(res.error)
                             {#$.each(res.error, function (name, errorList) {#}

@@ -55,3 +55,16 @@ def order_edit(request, oid):
     if not order:
         return JsonResponse({"status": False, "error": "not found"})
     return JsonResponse({"status": True, "data": order})
+
+
+@csrf_exempt
+def order_edit_save(request, oid):
+    order = models.Order.objects.filter(id=oid).first()
+    if not order:
+        return JsonResponse({"status": False, "error": "not found"})
+    form = OrderModelForm(data=request.POST, instance=order)
+    if form.is_valid():
+        form.instance.admin_id = request.session.get("info")["id"]
+        form.save()
+        return JsonResponse({"status": True})
+    return JsonResponse({"status": False, "error": form.errors})

@@ -56,4 +56,5 @@ urlpatterns = [
     path('order/add', order.order_add),
     path('order/delete', order.order_delete),
     path('order/<int:oid>/edit', order.order_edit),
+    path('order/edit/<int:oid>', order.order_edit_save),
 ]
