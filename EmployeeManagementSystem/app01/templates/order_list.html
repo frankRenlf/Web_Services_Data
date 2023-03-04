@@ -54,7 +54,7 @@
                         <td>{{ i.get_status_display }}</td>
                         <td>{{ i.admin.name }}</td>
                         <td>
-                            <a href="/order/{{ i.id }}/edit" class="btn btn-primary btn-xs">edit</a>
+                            <input oid="{{ i.id }}" type="button" class="btn btn-primary btn-xs btn-edit" value="edit">
                             <input oid="{{ i.id }}" type="button" class="btn btn-primary btn-xs btn-delete"
                                    value="delete">
                         </td>
@@ -74,7 +74,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">New Order</h4>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
                 </div>
                 <div class="modal-body">
                     <form action="" id="formAdd">
@@ -106,7 +106,7 @@
                 <h4>Confirm delete</h4>
                 <p>If yes, it cannot be recalled</p>
                 <p style="text-align: right">
-                    <button type="button" class="btn btn-danger btnConfirm">Take this action</button>
+                    <button type="button" class="btn btn-danger btnConfirmDelete">Take this action</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Or do recall</button>
                 </p>
             </div>
@@ -119,12 +119,18 @@
         $(function () {
             bindNewEvent()
             bindSaveEvent()
+
             bindDeleteEvent()
-            bindConfirmEvent()
+            bindConfirmDeleteEvent()
+
+            bindEditEvent()
+            {#bindConfirmEditEvent()#}
         })
 
         function bindNewEvent() {
             $("#add").click(function () {
+                $('#formAdd')[0].reset()
+                $('#myModalLabel').text('new order')
                 $('#myModal').modal('show')
             })
         }
@@ -164,19 +170,67 @@
             })
         }
 
-        function bindConfirmEvent() {
-            $(".btnConfirm").click(function () {
+        function bindConfirmDeleteEvent() {
+            $(".btnConfirmDelete").click(function () {
                 $.ajax({
                     url: "/order/delete",
                     type: "GET",
                     data: {oid},
                     dataType: "JSON",
                     success(res) {
-                        if(res.status){
+                        if (res.status) {
                             $('#myDelete').modal('hide')
                             location.reload()
                             oid = 0
-                        }else {
+                        } else {
+                            alert(res.error)
+                        }
+                    }
+                })
+            })
+        }
+
+        function bindEditEvent() {
+            $(".btn-edit").click(function () {
+                $('#myModalLabel').text('edit order')
+                oid = $(this).attr("oid")
+                $('#formAdd')[0].reset()
+                $.ajax({
+                    url: "/order/" + oid + "/edit",
+                    type: 'GET',
+                    dataType: 'JSON',
+                    success(res) {
+                        if (res.status) {
+                            $.each(res.data, function (k, v) {
+                                $('#id_' + k).val(v)
+                            })
+                            $("#myModal").modal('show')
+                        } else {
+                            alert(res.error)
+                            {#$.each(res.error, function (name, errorList) {#}
+                            {#    $('#id_' + name).next().text(errorList[0])})#}
+                        }
+                    },
+                    error(res) {
+                        alert(res.error)
+                    }
+                })
+            })
+        }
+
+        function bindConfirmEditEvent() {
+            $(".btnConfirmEdit").click(function () {
+                $.ajax({
+                    url: "/order/edit",
+                    type: "GET",
+                    data: {oid},
+                    dataType: "JSON",
+                    success(res) {
+                        if (res.status) {
+                            $('#myDelete').modal('hide')
+                            location.reload()
+                            oid = 0
+                        } else {
                             alert(res.error)
                         }
                     }

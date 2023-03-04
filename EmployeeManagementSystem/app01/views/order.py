@@ -48,3 +48,10 @@ def order_delete(request):
         return JsonResponse({"status": False, "error": "not found"})
     models.Order.objects.filter(id=oid).first().delete()
     return JsonResponse({"status": True})
+
+
+def order_edit(request, oid):
+    order = models.Order.objects.filter(id=oid).values("id", "title", "price", "status").first()
+    if not order:
+        return JsonResponse({"status": False, "error": "not found"})
+    return JsonResponse({"status": True, "data": order})
