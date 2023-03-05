@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from app01 import models
 from app01.utils.Pagination import Pagination
 from app01.modelForms.UserModelForm import UserModelForm
+from datetime import datetime
 
 """ create userinfo operations """
 
@@ -70,6 +71,8 @@ def user_upload(request):
     from openpyxl import load_workbook
     wb = load_workbook(file_obj)
     sheet = wb.worksheets[0]
-    cell = sheet.cell(1, 1)
-    print(cell.value)
-    return render(request, 'user_list.html')
+    for row in sheet.iter_rows(min_row=2):
+        models.UserInfo.objects.create(name=row[0].value, password=row[1].value, age=row[2].value,
+                                       gender=row[3].value, salary=row[4].value,
+                                       create_time=datetime.now(), depart_id=row[6].value)
+    return redirect('/user/list')
