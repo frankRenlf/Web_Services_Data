@@ -10,6 +10,10 @@ from datetime import datetime
 def upload_list(request):
     if request.method == 'GET':
         return render(request, 'upload_list.html')
-    print(request.POST)
-    print(request.FILES)
+    file_obj = request.FILES.get("file")
+    print(file_obj.name)
+    f = open('./app01/files/' + file_obj.name, mode='wb')
+    for chunk in file_obj.chunks():
+        f.write(chunk)
+    f.close()
     return render(request, 'upload_list.html')
