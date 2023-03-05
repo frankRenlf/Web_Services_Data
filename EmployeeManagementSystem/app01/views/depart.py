@@ -35,3 +35,12 @@ def depart_edit(request, did):
     title = request.POST.get("title")
     models.Department.objects.filter(id=did).update(title=title)
     return redirect('/depart/list')
+
+
+def depart_upload(request):
+    file_obj = request.FILES.get("file")
+    f = open('./app01/files/' + file_obj.name, mode='wb')
+    for chunk in file_obj.chunks():
+        f.write(chunk)
+    f.close()
+    return render(request, 'depart_list.html')
