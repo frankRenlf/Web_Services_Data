@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app01 import viewsHome
-from app01.views import depart, user, pretty, admin, account, task, order, chart
+from app01.views import depart, user, pretty, admin, account, task, order, chart, upload
 
 urlpatterns = [
     # home
@@ -62,4 +62,6 @@ urlpatterns = [
     path('chart/bar', chart.chart_bar),
     path('chart/pie', chart.chart_pie),
     path('chart/line', chart.chart_line),
+    # upload
+    path('upload/lsit', upload.upload_list)
 ]
