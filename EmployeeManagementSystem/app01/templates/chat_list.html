@@ -1,3 +1,33 @@
 {% extends 'layout.html' %}
+{% load static %}
 {% block content %}
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">Line chart</div>
+            <div class="panel-body">
+                Panel content
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Histogram</div>
+                    <div class="panel-body">
+                        Panel content
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Pie chart</div>
+                    <div class="panel-body">
+                        Panel content
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="{% static 'js/echarts.js' %}"></script>
 {% endblock %}
