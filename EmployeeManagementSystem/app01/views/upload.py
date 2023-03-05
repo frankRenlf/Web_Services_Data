@@ -16,3 +16,7 @@ def upload_list(request):
         f.write(chunk)
     f.close()
     return render(request, 'upload_list.html')
+
+
+def upload_form(request):
+    return None

@@ -64,5 +64,6 @@ urlpatterns = [
     path('chart/pie', chart.chart_pie),
     path('chart/line', chart.chart_line),
     # upload
-    path('upload/list', upload.upload_list)
+    path('upload/list', upload.upload_list),
+    path('upload/form', upload.upload_form),
 ]

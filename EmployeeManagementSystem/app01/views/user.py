@@ -66,6 +66,8 @@ def user_delete(request):
 def user_upload(request):
     # acquire file
     file_obj = request.FILES.get("file")
+    if file_obj is None:
+        return redirect('/user/list')
 
     # convey to openpyxl
     from openpyxl import load_workbook
