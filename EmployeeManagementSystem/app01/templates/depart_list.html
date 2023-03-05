@@ -9,6 +9,7 @@
             </div>
             <div class="panel-body">
                 <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
                     <div class="form-group">
                         <input type="file" value="choose">
                     </div>
