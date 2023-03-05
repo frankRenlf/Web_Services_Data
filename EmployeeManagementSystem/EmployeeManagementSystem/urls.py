@@ -59,4 +59,5 @@ urlpatterns = [
     path('order/edit/<int:oid>', order.order_edit_save),
     # chart
     path('chart/list', chart.chart_list),
+    path('chart/histogram', chart.chart_histogram),
 ]

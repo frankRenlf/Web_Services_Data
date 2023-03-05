@@ -8,4 +8,8 @@ from datetime import datetime
 
 
 def chart_list(request):
-    return render(request,"chat_list.html")
+    return render(request, "chat_list.html")
+
+
+def chart_histogram(request):
+    return None
