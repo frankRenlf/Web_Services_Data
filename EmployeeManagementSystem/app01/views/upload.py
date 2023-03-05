@@ -5,6 +5,7 @@ from app01.modelForms.OrderModelForm import OrderModelForm
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from datetime import datetime
+from app01.modelForms.UploadModelForm import UploadForm
 
 
 def upload_list(request):
@@ -19,4 +20,5 @@ def upload_list(request):
 
 
 def upload_form(request):
-    return render(request,'upload_form.html')
+    form = UploadForm()
+    return render(request, 'upload_form.html', {"form": form, "title": "upload"})
