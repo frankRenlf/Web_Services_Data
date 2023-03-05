@@ -60,4 +60,5 @@ urlpatterns = [
     # chart
     path('chart/list', chart.chart_list),
     path('chart/bar', chart.chart_bar),
+    path('chart/pie', chart.chart_pie),
 ]

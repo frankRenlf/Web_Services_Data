@@ -14,7 +14,6 @@
                     <div class="panel-heading">Bar chart</div>
                     <div class="panel-body">
                         <div id="m2" style="width: 100%;height:400px;">
-
                         </div>
                     </div>
                 </div>
@@ -23,7 +22,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Pie chart</div>
                     <div class="panel-body">
-                        Panel content
+                        <div id="m3" style="width: 100%;height: 400px;">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -41,12 +41,12 @@
 
         function initHistogram() {
             // 基于准备好的dom，初始化echarts实例
-            var myChart = echarts.init(document.getElementById('m2'));
+            let myChart = echarts.init(document.getElementById('m2'));
 
             // 指定图表的配置项和数据
-            var option = {
+            let option = {
                 title: {
-                    text: 'ECharts 入门示例',
+                    text: '',
                     textAlign: "auto",
                     left: 'center',
                 },
@@ -67,7 +67,7 @@
                 dataType: 'JSON',
                 success(res) {
                     if (res.status) {
-                        console.log(res.data)
+                        option.title.text = res.data.title
                         option.legend.data = res.data.legend
                         option.xAxis.data = res.data.xAxis
                         option.series = res.data.series
@@ -78,13 +78,60 @@
                 }
             })
             // 使用刚指定的配置项和数据显示图表。
-
         }
 
         function initLine() {
         }
 
         function initPie() {
+            // 基于准备好的dom，初始化echarts实例
+            let myChart = echarts.init(document.getElementById('m3'));
+
+            // 指定图表的配置项和数据
+            let option = {
+                title: {
+                    text: '',
+                    subtext: 'Fake Data',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'item'
+                },
+                legend: {
+                    left: 'center',
+                    bottom: 0,
+                },
+                series: [
+                    {
+                        name: 'Access From',
+                        type: 'pie',
+                        radius: '50%',
+                        data: [],
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+            $.ajax({
+                url: '/chart/pie',
+                type: 'GET',
+                dataType: 'JSON',
+                success(res) {
+                    if (res.status) {
+                        option.title.text = res.data.title
+                        option.series[0].data = res.data.series
+                        myChart.setOption(option);
+                    } else {
+                        alert('load error')
+                    }
+                }
+            })
+            // 使用刚指定的配置项和数据显示图表。
         }
     </script>
 {% endblock %}
