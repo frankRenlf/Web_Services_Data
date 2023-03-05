@@ -60,3 +60,16 @@ def user_delete(request):
     uid = request.GET.get("id")
     models.UserInfo.objects.filter(id=uid).delete()
     return redirect('/user/list')
+
+
+def user_upload(request):
+    # acquire file
+    file_obj = request.FILES.get("file")
+
+    # convey to openpyxl
+    from openpyxl import load_workbook
+    wb = load_workbook(file_obj)
+    sheet = wb.worksheets[0]
+    cell = sheet.cell(1, 1)
+    print(cell.value)
+    return render(request, 'user_list.html')

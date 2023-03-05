@@ -37,10 +37,4 @@ def depart_edit(request, did):
     return redirect('/depart/list')
 
 
-def depart_upload(request):
-    file_obj = request.FILES.get("file")
-    f = open('./app01/files/' + file_obj.name, mode='wb')
-    for chunk in file_obj.chunks():
-        f.write(chunk)
-    f.close()
-    return render(request, 'depart_list.html')
+

@@ -23,7 +23,6 @@ urlpatterns = [
     path('', viewsHome.home),
     # depart
     path('depart/list', depart.depart_list),
-    path('depart/upload', depart.depart_upload),
     path('depart/add', depart.depart_add),
     path('depart/delete', depart.depart_delete),
     path('depart/<int:did>/edit', depart.depart_edit),
@@ -33,6 +32,7 @@ urlpatterns = [
     path('user/modelForm/add', user.user_modelform_add),
     path('user/delete', user.user_delete),
     path('user/<int:uid>/edit', user.user_modelform_edit),
+    path('user/upload', user.user_upload),
     # pretty
     path('pretty/list', pretty.pretty_list),
     path('pretty/add', pretty.pretty_add),
