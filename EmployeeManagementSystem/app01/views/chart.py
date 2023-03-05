@@ -23,7 +23,6 @@ def chart_bar(request):
          'data': [20, 60, 5, 20, 36, 10, 10]
          }]
     xAxis = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']
-    print(type(series))
     result = {
         "status": True,
         "data": {
@@ -38,17 +37,64 @@ def chart_bar(request):
 
 def chart_pie(request):
     title = "Pie"
-    series = [{'value': 1048, 'name': 'Search Engine', 'data': [1, 2]},
-              {'value': 735, 'name': 'Direct', 'data': [1, 2]},
-              {'value': 580, 'name': 'Email', 'data': [1, 2]},
-              {'value': 484, 'name': 'Union Ads', 'data': [1, 2]},
-              {'value': 300, 'name': 'Video Ads', 'data': [1, 2]}]
-    print(type(series))
+    series = [{'value': 1048, 'name': 'Search Engine'},
+              {'value': 735, 'name': 'Direct'},
+              {'value': 580, 'name': 'Email'},
+              {'value': 484, 'name': 'Union Ads'},
+              {'value': 300, 'name': 'Video Ads'}]
     result = {
         "status": True,
         "data": {
             "title": title,
             "series": series,
+        }
+    }
+    return JsonResponse(result)
+
+
+def chart_line(request):
+    legend = ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+    title = "Line"
+    series = [
+        {
+            'name': 'Email',
+            'type': 'line',
+            'stack': 'Total',
+            'data': [120, 132, 101, 134, 90, 230, 210]
+        },
+        {
+            'name': 'Union Ads',
+            'type': 'line',
+            'stack': 'Total',
+            'data': [220, 182, 191, 234, 290, 330, 310]
+        },
+        {
+            'name': 'Video Ads',
+            'type': 'line',
+            'stack': 'Total',
+            'data': [150, 232, 201, 154, 190, 330, 410]
+        },
+        {
+            'name': 'Direct',
+            'type': 'line',
+            'stack': 'Total',
+            'data': [320, 332, 301, 334, 390, 330, 320]
+        },
+        {
+            'name': 'Search Engine',
+            'type': 'line',
+            'stack': 'Total',
+            'data': [820, 932, 901, 934, 1290, 1330, 1320]
+        }
+    ]
+    xAxis = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    result = {
+        "status": True,
+        "data": {
+            "title": title,
+            "legend": legend,
+            "series": series,
+            "xAxis": xAxis
         }
     }
     return JsonResponse(result)
