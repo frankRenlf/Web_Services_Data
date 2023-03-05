@@ -19,4 +19,4 @@ def upload_list(request):
 
 
 def upload_form(request):
-    return None
+    return render(request,'upload_form.html')
