@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app01 import viewsHome
-from app01.views import depart, user, pretty, admin, account, task, order, chart, upload
+from app01.views import depart, user, pretty, admin, account, task, order, chart, upload, MyModelList
 
 urlpatterns = [
     # home
@@ -26,6 +26,7 @@ urlpatterns = [
     path('depart/add', depart.depart_add),
     path('depart/delete', depart.depart_delete),
     path('depart/<int:did>/edit', depart.depart_edit),
+    path('knowledge', MyModelList.MyModelList.as_view()),
     # user
     path('user/list', user.user_list),
     path('user/add', user.user_add),
@@ -66,4 +67,7 @@ urlpatterns = [
     # upload
     path('upload/list', upload.upload_list),
     path('upload/form', upload.upload_form),
+
+    # new app knowledge
+
 ]

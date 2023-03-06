@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from app01 import models
 from app01.utils.Pagination import Pagination
+from rest_framework.views import APIView
 
 """ create depart operations """
 
@@ -35,6 +36,3 @@ def depart_edit(request, did):
     title = request.POST.get("title")
     models.Department.objects.filter(id=did).update(title=title)
     return redirect('/depart/list')
-
-
-
