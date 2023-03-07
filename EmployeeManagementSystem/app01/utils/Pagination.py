@@ -15,7 +15,6 @@ class Pagination(object):
         self.params = params
         self.data_start = (self.page_index - 1) * page_size
         self.data_end = self.page_index * page_size
-
         self.number_list = data_list[self.data_start: self.data_end]
 
         self.sub = sub

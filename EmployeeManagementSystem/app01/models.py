@@ -9,6 +9,15 @@ class Admin(models.Model):
         return self.name
 
 
+class Employees(models.Model):
+    firstname = models.CharField(max_length=32)
+    lastname = models.CharField(max_length=32)
+    emp_id = models.IntegerField()
+
+    def __str__(self):
+        return self.firstname
+
+
 # Create your models here.
 class Department(models.Model):
     title = models.CharField(max_length=32)
