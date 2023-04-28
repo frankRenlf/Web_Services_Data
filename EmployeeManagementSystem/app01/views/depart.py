@@ -36,3 +36,6 @@ def depart_edit(request, did):
     title = request.POST.get("title")
     models.Department.objects.filter(id=did).update(title=title)
     return redirect('/depart/list')
+
+
+
