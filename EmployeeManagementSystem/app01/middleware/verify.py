@@ -1,3 +1,4 @@
+import numpy
 from django.utils.deprecation import MiddlewareMixin
 from django.shortcuts import redirect
 
@@ -12,3 +13,10 @@ class Authorise(MiddlewareMixin):
     def process_response(self, request, response):
         return response
 
+
+if __name__ == "__main__":
+    thisdict = {
+        "brand": "Porsche",
+        "model": "911",
+        "year": 1963
+    }
