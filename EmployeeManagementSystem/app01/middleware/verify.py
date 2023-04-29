@@ -20,3 +20,7 @@ if __name__ == "__main__":
         "model": "911",
         "year": 1963
     }
+    print(type(thisdict))
+    print(type([{
+        "name": "fff"
+    }][0]))
