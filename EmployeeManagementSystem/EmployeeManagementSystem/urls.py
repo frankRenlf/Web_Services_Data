@@ -16,7 +16,7 @@ Including another URLconf
 # from django.contrib import admin
 from django.urls import path
 from app01 import viewsHome
-from app01.views import depart, user, pretty, admin, account, task, order, chart, upload
+from app01.views import depart, user, pretty, admin, account, task, order, chart, upload, flight
 from app01.rest_frame import MyModelList
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -68,6 +68,12 @@ urlpatterns = [
     # upload
     path('upload/list', upload.upload_list),
     path('upload/form', upload.upload_form),
+
+    # airline
+    path('flight/list', flight.flight_list),
+    path('flight/modelForm/add', flight.flight_modelform_add),
+    path('flight/delete', flight.flight_delete),
+    path('flight/<int:uid>/edit', flight.flight_modelform_edit),
 
     # new app knowledge
 

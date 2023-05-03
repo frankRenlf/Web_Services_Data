@@ -46,6 +46,20 @@ class UserInfo(models.Model):
         return self.name
 
 
+class Flight(models.Model):
+    flight_id = models.IntegerField()
+    airline_name = models.CharField(max_length=16)
+    departure_time = models.DateTimeField()
+    arrival_time = models.DateTimeField()
+    departure_location = models.CharField(max_length=64)
+    arrival_location = models.CharField(max_length=64)
+    flight_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    seat_number = models.IntegerField()
+
+    def __str__(self):
+        return self.airline_name
+
+
 class PrettyNumber(models.Model):
     mobile = models.CharField(max_length=11)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
