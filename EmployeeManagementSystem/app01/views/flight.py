@@ -1,8 +1,13 @@
-from django.shortcuts import render, redirect
 from app01 import models
 from app01.utils.Pagination import Pagination
 from app01.modelForms.flightModelForm import FlightModelForm
 from datetime import datetime
+from rest_framework import generics
+from app01.models import Department
+from app01.serializers import MyModelSerializer
+from django.shortcuts import render, redirect, HttpResponse
+from app01 import models
+from app01.utils.Pagination import Pagination
 
 
 def flight_list(request):
@@ -40,3 +45,21 @@ def flight_delete(request):
     uid = request.GET.get("id")
     models.Flight.objects.filter(id=uid).delete()
     return redirect('/flight/list')
+
+
+class FlightList(generics.ListCreateAPIView):
+    def get(self, request, *args, **kwargs):
+        flight_union = models.Flight.objects.all()
+        pagination = Pagination(request, flight_union)
+        return render(request, 'flight_list.html',
+                      {'flight_union': pagination.number_list, "page_list": pagination.page_list})
+
+    def post(self, request, *args, **kwargs):
+        uid = request.POST.get("fid")
+        models.Flight.objects.filter(id=uid).delete()
+        flight_union = models.Flight.objects.all()
+        pagination = Pagination(request, flight_union)
+        return render(request, 'flight_list.html',
+                      {'flight_union': pagination.number_list, "page_list": pagination.page_list})
+
+

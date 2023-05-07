@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% load static %}
 {% block content %}
     <div class="container">
         <div style="margin-bottom: 10px" class="clearfix">
@@ -8,7 +9,7 @@
             <div style="float: right; width: 300px">
                 <form method="get">
                     <div class="input-group">
-                        <input type="text" name="title" class="form-control" placeholder="Search for..."
+                        <input type="text" name="flight_id" class="form-control" placeholder="Search for flight..."
                                value="{{ search }}">
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="submit">
@@ -37,10 +38,11 @@
                 <tr>
                     <th>ID</th>
                     <th>NUMBER</th>
-                    <th>TITLE</th>
+                    <th>FLIGHT</th>
+                    <th>PASSENGER</th>
                     <th>PRICE</th>
+                    <th>CREATE_TIME</th>
                     <th>STATUS</th>
-                    <th>ADMIN_ID</th>
                     <th>OPERATION</th>
                 </tr>
                 </thead>
@@ -49,10 +51,11 @@
                     <tr oid="{{ i.id }}">
                         <th>{{ i.id }}</th>
                         <td>{{ i.number }}</td>
-                        <td>{{ i.title }}</td>
+                        <td>{{ i.flight_id }}</td>
+                        <td>{{ i.passenger_id }}</td>
                         <td>{{ i.price }}</td>
+                        <td>{{ i.create_time | date:"Y-m-d H:i" }}</td>
                         <td>{{ i.get_status_display }}</td>
-                        <td>{{ i.admin.name }}</td>
                         <td>
                             <input oid="{{ i.id }}" type="button" class="btn btn-primary btn-xs btn-edit" value="edit">
                             <input oid="{{ i.id }}" type="button" class="btn btn-primary btn-xs btn-delete"
@@ -114,6 +117,21 @@
     </div>
 {% endblock %}
 {% block js %}
+
+    <script src="{% static 'plugins/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.zh-CN.js' %}"></script>
+    <script>
+        $(function () {
+            $('#id_create_time').datetimepicker({
+                format: 'yyyy-mm-dd hh:ii',
+                startDate: '0',
+                language: 'uk',
+                autoclose: true
+            })
+        })
+    </script>
+
+
     <script>
         let oid;
         let is_edit;

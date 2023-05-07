@@ -15,6 +15,7 @@ def pretty_list(request):
     if mobile_txt:
         data_dict[search + "__contains"] = mobile_txt
     data_list = models.PrettyNumber.objects.filter(**data_dict).order_by("-level")
+    print(data_dict)
     sub = 2
     pagination = Pagination(request, data_list, search, page_size, "index", sub)
 

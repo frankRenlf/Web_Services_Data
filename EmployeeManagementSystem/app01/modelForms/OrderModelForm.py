@@ -7,4 +7,4 @@ class OrderModelForm(BootstrapModelForm):
     class Meta:
         model = models.Order
         # fields = "__all__"
-        exclude = ["number", "admin"]
+        exclude = ["number"]

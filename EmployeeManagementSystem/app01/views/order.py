@@ -12,14 +12,17 @@ from datetime import datetime
 def order_list(request):
     form = OrderModelForm()
     # return render(request, "order_list.html", {"form": form})
-    search_txt = request.GET.get("title")
-    search_txt = search_txt if search_txt is not None else ''
+    search_txt = request.GET.get("flight_id")
     page_size = 3
     data_dict = {}
-    search = "title"
+    search = "flight"
     if search_txt:
         data_dict[search + "__contains"] = search_txt
-    data_list = models.Order.objects.filter(**data_dict).order_by("-id")
+    if search_txt is None or search_txt is '':
+        data_list = models.Order.objects.filter().order_by("-id")
+    else:
+        data_list = models.Order.objects.filter(flight_id=int(search_txt, base=10)).order_by("-id")
+
     sub = 2
     pagination = Pagination(request, data_list, search, page_size, "index", sub)
 
@@ -51,7 +54,8 @@ def order_delete(request):
 
 
 def order_edit(request, oid):
-    order = models.Order.objects.filter(id=oid).values("id", "title", "price", "status").first()
+    order = models.Order.objects.filter(id=oid).values("id", "flight_id", "passenger_id", "price", "create_time",
+                                                       "status").first()
     if not order:
         return JsonResponse({"status": False, "error": "not found"})
     return JsonResponse({"status": True, "data": order})

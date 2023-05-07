@@ -18,6 +18,7 @@ from django.urls import path
 from app01 import viewsHome
 from app01.views import depart, user, pretty, admin, account, task, order, chart, upload, flight
 from app01.rest_frame import MyModelList
+from app01.views.flight import FlightList
 urlpatterns = [
     # path('admin/', admin.site.urls),
     # home
@@ -69,12 +70,14 @@ urlpatterns = [
     path('upload/list', upload.upload_list),
     path('upload/form', upload.upload_form),
 
-    # airline
-    path('flight/list', flight.flight_list),
+    # flight
+    # path('flight/list', flight.flight_list),
     path('flight/modelForm/add', flight.flight_modelform_add),
-    path('flight/delete', flight.flight_delete),
+    # path('flight/delete', flight.flight_delete),
     path('flight/<int:uid>/edit', flight.flight_modelform_edit),
 
+
+    path('flight/', FlightList.as_view()),
     # new app knowledge
 
 ]

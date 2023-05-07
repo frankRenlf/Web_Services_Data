@@ -7,15 +7,15 @@
                 <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                 Batch upload
             </div>
-{#            <div class="panel-body">#}
-{#                <form action="/user/upload" method="post" enctype="multipart/form-data">#}
-{#                    {% csrf_token %}#}
-{#                    <div class="form-group">#}
-{#                        <input type="file" name="file" value="choose">#}
-{#                    </div>#}
-{#                    <input type="submit" class="btn btn-info btn-sm" value="submit">#}
-{#                </form>#}
-{#            </div>#}
+            {#            <div class="panel-body">#}
+            {#                <form action="/user/upload" method="post" enctype="multipart/form-data">#}
+            {#                    {% csrf_token %}#}
+            {#                    <div class="form-group">#}
+            {#                        <input type="file" name="file" value="choose">#}
+            {#                    </div>#}
+            {#                    <input type="submit" class="btn btn-info btn-sm" value="submit">#}
+            {#                </form>#}
+            {#            </div>#}
         </div>
         <div style="margin-bottom: 10px">
             <a href="/flight/modelForm/add" class="btn btn-success">
@@ -65,7 +65,8 @@
                         <td>{{ i.seat_number }}</td>
                         <td>
                             <a href="/flight/{{ i.id }}/edit" class="btn btn-primary btn-xs">edit</a>
-                            <a href="/flight/delete?id={{ i.id }}" class="btn btn-primary btn-xs">delete</a>
+                            <input value="delete" fid="{{ i.id }}" class="btn btn-primary btn-xs del"
+                                   type="button">
                         </td>
                     </tr>
                 {% endfor %}
@@ -76,4 +77,29 @@
             {{ page_list }}
         </ul>
     </div>
+{% endblock %}
+{% block js %}
+    <script>
+        $(function () {
+            bindDeleteEvent()
+
+        })
+
+        function bindDeleteEvent() {
+            $(".del").click(function () {
+                let txt1 = {
+                    "fid": $('.del').data('fid'),
+                }
+                $.ajax({
+                    url: "/flight/",
+                    data: txt1,
+                    type: "POST",
+                    success(res) {
+                        {#location.reload()#}
+                        console.log(txt1)
+                    }
+                })
+            })
+        }
+    </script>
 {% endblock %}

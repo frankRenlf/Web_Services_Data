@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 
 class Admin(models.Model):
@@ -46,6 +48,36 @@ class UserInfo(models.Model):
         return self.name
 
 
+class Passenger(models.Model):
+    name = models.CharField(max_length=16)
+
+    def __str__(self):
+        return self.name
+
+
+class Order(models.Model):
+    number = models.CharField(max_length=64)
+    flight = models.ForeignKey(to="Flight", to_field="id",
+                               null=True, blank=True, on_delete=models.SET_NULL)
+    passenger = models.ForeignKey(to="Passenger", to_field="id",
+                                  null=True, blank=True, on_delete=models.SET_NULL)
+
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    create_time = models.DateTimeField()
+    status_choices = (
+        (1, "Paid"),
+        (0, "Unpaid")
+    )
+    status = models.SmallIntegerField(choices=status_choices, default=0)
+
+
+@receiver(pre_save, sender=Order)
+def update_order_price(sender, instance, **kwargs):
+    if instance.flight:
+        instance.price = instance.flight.flight_price
+
+
 class Flight(models.Model):
     flight_id = models.IntegerField()
     airline_name = models.CharField(max_length=16)
@@ -74,15 +106,3 @@ class PrettyNumber(models.Model):
     )
     level = models.SmallIntegerField(choices=level_choices, default=1)
     status = models.SmallIntegerField(choices=status_choices, default=1)
-
-
-class Order(models.Model):
-    number = models.CharField(max_length=64)
-    title = models.CharField(max_length=32)
-    price = models.DecimalField(max_digits=10, decimal_places=1)
-    status_choices = (
-        (1, "Paid"),
-        (0, "Unpaid")
-    )
-    status = models.SmallIntegerField(choices=status_choices, default=0)
-    admin = models.ForeignKey(to="Admin", to_field="id", on_delete=models.CASCADE)

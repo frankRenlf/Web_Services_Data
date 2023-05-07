@@ -18,3 +18,4 @@ class MyModelList(generics.ListCreateAPIView):
 
     def post(self, request, *args, **kwargs):
         return HttpResponse('post')
+
