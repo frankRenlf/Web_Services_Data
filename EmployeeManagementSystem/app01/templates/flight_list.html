@@ -18,7 +18,7 @@
             {#            </div>#}
         </div>
         <div style="margin-bottom: 10px">
-            <a href="/flight/modelForm/add" class="btn btn-success">
+            <a href="/flight/?add=1" class="btn btn-success">
                 <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                 insert new flight
             </a>
@@ -64,8 +64,8 @@
                         <td>{{ i.flight_price }}</td>
                         <td>{{ i.seat_number }}</td>
                         <td>
-                            <a href="/flight/{{ i.id }}/edit" class="btn btn-primary btn-xs">edit</a>
-                            <a href="/flight/{{ i.id }}/delete" class="btn btn-primary btn-xs">delete</a>
+                            <a href="/flight/?edit=1&fid={{ i.id }}" class="btn btn-primary btn-xs">edit</a>
+                            <a href="/flight/?delete=1&fid={{ i.id }}" class="btn btn-primary btn-xs">delete</a>
 
                         </td>
                     </tr>

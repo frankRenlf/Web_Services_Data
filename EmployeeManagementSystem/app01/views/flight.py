@@ -48,7 +48,44 @@ def flight_delete(request, fid):
 
 class FlightList(generics.RetrieveUpdateDestroyAPIView):
     def get(self, request, *args, **kwargs):
+        add = request.GET.get("add")
+        edit = request.GET.get("edit")
+        delete = request.GET.get("delete")
+        fid = request.GET.get('fid')
+        if add:
+            user_null = FlightModelForm()
+            return render(request, 'flightForm_add.html', {"flightForm": user_null})
+
+        if edit:
+            user = models.Flight.objects.filter(id=fid).first()
+            user_null = FlightModelForm(instance=user)
+            return render(request, 'flightForm_edit.html', {"flightForm": user_null})
+
+        if delete:
+            models.Flight.objects.filter(id=fid).first().delete()
+            return redirect('/flight/')
+
         flight_union = models.Flight.objects.all()
         pagination = Pagination(request, flight_union)
         return render(request, 'flight_list.html',
                       {'flight_union': pagination.number_list, "page_list": pagination.page_list})
+
+    def post(self, request, *args, **kwargs):
+        add = request.GET.get("add")
+        edit = request.GET.get("edit")
+        fid = request.GET.get('fid')
+
+        if add:
+            user_form = FlightModelForm(data=request.POST)
+            if user_form.is_valid():
+                user_form.save()
+                return redirect('/flight/')
+            return render(request, 'flightForm_add.html', {"flightForm": user_form})
+
+        if edit:
+            user = models.Flight.objects.filter(id=fid).first()
+            user_form = FlightModelForm(data=request.POST, instance=user)
+            if user_form.is_valid():
+                user_form.save()
+                return redirect('/flight/')
+            return render(request, 'flightForm_edit.html', {"flightForm": user_form})

@@ -72,9 +72,9 @@ urlpatterns = [
 
     # flight
     # path('flight/list', flight.flight_list),
-    path('flight/modelForm/add', flight.flight_modelform_add),
-    path('flight/<int:fid>/delete', flight.flight_delete),
-    path('flight/<int:fid>/edit', flight.flight_modelform_edit),
+    # path('flight/modelForm/add', flight.flight_modelform_add),
+    # path('flight/<int:fid>/delete', flight.flight_delete),
+    # path('flight/<int:fid>/edit', flight.flight_modelform_edit),
 
 
     path('flight/', FlightList.as_view()),
