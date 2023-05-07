@@ -65,8 +65,8 @@
                         <td>{{ i.seat_number }}</td>
                         <td>
                             <a href="/flight/{{ i.id }}/edit" class="btn btn-primary btn-xs">edit</a>
-                            <input value="delete" fid="{{ i.id }}" class="btn btn-primary btn-xs del"
-                                   type="button">
+                            <a href="/flight/{{ i.id }}/delete" class="btn btn-primary btn-xs">delete</a>
+
                         </td>
                     </tr>
                 {% endfor %}
@@ -77,29 +77,4 @@
             {{ page_list }}
         </ul>
     </div>
-{% endblock %}
-{% block js %}
-    <script>
-        $(function () {
-            bindDeleteEvent()
-
-        })
-
-        function bindDeleteEvent() {
-            $(".del").click(function () {
-                let txt1 = {
-                    "fid": $('.del').data('fid'),
-                }
-                $.ajax({
-                    url: "/flight/",
-                    data: txt1,
-                    type: "POST",
-                    success(res) {
-                        {#location.reload()#}
-                        console.log(txt1)
-                    }
-                })
-            })
-        }
-    </script>
 {% endblock %}
