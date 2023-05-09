@@ -55,6 +55,13 @@ class Passenger(models.Model):
         return self.name
 
 
+class payment_method(models.Model):
+    payment_platform = models.CharField(max_length=16)
+
+    def __str__(self):
+        return self.payment_platform
+
+
 class Order(models.Model):
     number = models.CharField(max_length=64)
     flight = models.ForeignKey(to="Flight", to_field="id",
@@ -70,6 +77,8 @@ class Order(models.Model):
         (0, "Unpaid")
     )
     status = models.SmallIntegerField(choices=status_choices, default=0)
+    payment_platform = models.ForeignKey(to="payment_method", to_field="id",
+                                         null=True, blank=True, on_delete=models.SET_NULL)
 
 
 @receiver(pre_save, sender=Order)

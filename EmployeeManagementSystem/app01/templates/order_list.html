@@ -43,6 +43,7 @@
                     <th>PRICE</th>
                     <th>CREATE_TIME</th>
                     <th>STATUS</th>
+                    <th>PAYMENT_PLATFORM</th>
                     <th>OPERATION</th>
                 </tr>
                 </thead>
@@ -56,6 +57,7 @@
                         <td>{{ i.price }}</td>
                         <td>{{ i.create_time | date:"Y-m-d H:i" }}</td>
                         <td>{{ i.get_status_display }}</td>
+                        <td>{{ i.payment_platform_id }}</td>
                         <td>
                             <input oid="{{ i.id }}" type="button" class="btn btn-primary btn-xs btn-edit" value="edit">
                             <input oid="{{ i.id }}" type="button" class="btn btn-primary btn-xs btn-delete"

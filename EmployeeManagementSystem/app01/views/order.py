@@ -25,7 +25,7 @@ def order_list(request):
 
     sub = 2
     pagination = Pagination(request, data_list, search, page_size, "index", sub)
-
+    print(pagination.number_list[0].__dict__)
     return render(request, 'order_list.html',
                   {"number_list": pagination.number_list, "page_list": pagination.page_list,
                    "search": "" if pagination.search_query is None else pagination.search_query,
