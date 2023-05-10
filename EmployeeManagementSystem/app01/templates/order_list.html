@@ -162,7 +162,7 @@
                 $('.error-msg').empty()
                 if (!is_edit) {
                     $.ajax({
-                        url: '/order/add',
+                        url: '/order/',
                         type: 'post',
                         data: $("#formAdd").serialize(),
                         dataType: 'JSON',
@@ -184,8 +184,8 @@
                     })
                 } else {
                     $.ajax({
-                        url: '/order/edit/' + oid,
-                        type: 'post',
+                        url: '/order/?oid=' + oid,
+                        type: 'patch',
                         data: $("#formAdd").serialize(),
                         dataType: 'JSON',
                         success(res) {
@@ -219,8 +219,8 @@
         function bindConfirmDeleteEvent() {
             $(".btnConfirmDelete").click(function () {
                 $.ajax({
-                    url: "/order/delete",
-                    type: "GET",
+                    url: "/order/?oid=" + oid,
+                    type: "delete",
                     data: {oid},
                     dataType: "JSON",
                     success(res) {

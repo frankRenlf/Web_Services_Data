@@ -80,6 +80,18 @@ class Order(models.Model):
     payment_platform = models.ForeignKey(to="payment_method", to_field="id",
                                          null=True, blank=True, on_delete=models.SET_NULL)
 
+    def to_json(self):
+        return {
+            "order_id": self.id,
+            "number": self.number,
+            "flight_id": self.flight_id,
+            "passenger_id": self.passenger_id,
+            "price": self.price,
+            "create_time": self.create_time.isoformat(),
+            "status": self.status,
+            "payment_platform": self.payment_platform_id
+        }
+
 
 @receiver(pre_save, sender=Order)
 def update_order_price(sender, instance, **kwargs):
@@ -99,6 +111,18 @@ class Flight(models.Model):
 
     def __str__(self):
         return self.airline_name
+
+    def to_json(self):
+        return {
+            "flight_id": self.flight_id,
+            "airline_name": self.airline_name,
+            "departure_time": self.departure_time.isoformat(),
+            "arrival_time": self.arrival_time.isoformat(),
+            "departure_location": self.departure_location,
+            "arrival_location": self.arrival_location,
+            "flight_price": str(self.flight_price),
+            "seat_number": self.seat_number,
+        }
 
 
 class PrettyNumber(models.Model):

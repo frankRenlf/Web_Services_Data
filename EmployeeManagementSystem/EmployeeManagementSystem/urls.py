@@ -18,7 +18,8 @@ from django.urls import path
 from app01 import viewsHome
 from app01.views import depart, user, pretty, admin, account, task, order, chart, upload, flight
 from app01.rest_frame import MyModelList
-from app01.views.flight import FlightList
+from app01.views.flight import FlightList, FlightData
+from app01.views.order import OrderList, OrderData
 urlpatterns = [
     # path('admin/', admin.site.urls),
     # home
@@ -55,12 +56,7 @@ urlpatterns = [
     # task
     path('task/ajax', task.task_ajax),
     path('task/list', task.task_list),
-    # order
-    path('order/list', order.order_list),
-    path('order/add', order.order_add),
-    path('order/delete', order.order_delete),
-    path('order/<int:oid>/edit', order.order_edit),
-    path('order/edit/<int:oid>', order.order_edit_save),
+
     # chart
     path('chart/list', chart.chart_list),
     path('chart/bar', chart.chart_bar),
@@ -75,9 +71,17 @@ urlpatterns = [
     # path('flight/modelForm/add', flight.flight_modelform_add),
     # path('flight/<int:fid>/delete', flight.flight_delete),
     # path('flight/<int:fid>/edit', flight.flight_modelform_edit),
-
-
     path('flight/', FlightList.as_view()),
+    path('flight_data/', FlightData.as_view()),
+
+    # order
+    # path('order/list', order.order_list),
+    # path('order/add', order.order_add),
+    # path('order/delete', order.order_delete),
+    path('order/<int:oid>/edit', order.order_edit),
+    # path('order/edit/<int:oid>', order.order_edit_save),
+
+    path('order/', OrderList.as_view()),
     # new app knowledge
 
 ]

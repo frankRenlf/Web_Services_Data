@@ -1,9 +1,14 @@
+import json
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
 from app01 import models
 from app01.utils.Pagination import Pagination
 from app01.modelForms.flightModelForm import FlightModelForm
 from datetime import datetime
 from rest_framework import generics
-from app01.models import Department
+from app01.models import Department, Flight
 from app01.serializers import MyModelSerializer
 from django.shortcuts import render, redirect, HttpResponse
 from app01 import models
@@ -44,6 +49,35 @@ def flight_modelform_edit(request, fid):
 def flight_delete(request, fid):
     models.Flight.objects.filter(id=fid).first().delete()
     return redirect('/flight/')
+
+
+class FlightEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, Flight):
+            return {"flight_id": obj.flight_id,
+                    "airline_name": obj.airline_name,
+                    "departure_time": obj.departure_time.isoformat(),
+                    "arrival_time": obj.arrival_time.isoformat(),
+                    "departure_location": obj.departure_location,
+                    "arrival_location": obj.arrival_location,
+                    "flight_price": str(obj.flight_price),
+                    "seat_number": obj.seat_number, }
+        return super().default(obj)
+
+
+class FlightData(generics.RetrieveUpdateDestroyAPIView):
+    @csrf_exempt
+    def get(self, request, *args, **kwargs):
+        flight_union = models.Flight.objects.all()
+        pagination = Pagination(request, flight_union)
+        data = {'flight_union': pagination.number_list, "page_list": pagination.page_list}
+        fu = {}
+        i = 0
+        print("get")
+        for d in list(flight_union):
+            fu[i] = json.dumps(d, cls=FlightEncoder)
+            i += 1
+        return JsonResponse({'flight_union': fu})
 
 
 class FlightList(generics.RetrieveUpdateDestroyAPIView):
