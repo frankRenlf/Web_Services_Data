@@ -20,6 +20,8 @@ from app01.views import depart, user, pretty, admin, account, task, order, chart
 from app01.rest_frame import MyModelList
 from app01.views.flight import FlightList, FlightData
 from app01.views.order import OrderList, OrderData
+from app01.views.payment import PaymentProvider
+from app01.views.aggregator import Aggregator
 urlpatterns = [
     # path('admin/', admin.site.urls),
     # home
@@ -83,6 +85,7 @@ urlpatterns = [
 
     path('order/', OrderList.as_view()),
     path('order_data/', OrderData.as_view()),
-    # new app knowledge
-
+    # apis
+    path('payment/', PaymentProvider.as_view()),
+    path('aggregator/', Aggregator.as_view()),
 ]

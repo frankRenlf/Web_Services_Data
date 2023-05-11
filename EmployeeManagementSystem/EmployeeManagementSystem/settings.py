@@ -116,7 +116,7 @@ USE_TZ = True
 
 SECURE_CONTENT_TYPE_NOSNIFF = False
 SECURE_BROWSER_XSS_FILTER = False
-
+APPEND_SLASH = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
