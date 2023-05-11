@@ -1,7 +1,10 @@
+import os
+
 from django.shortcuts import render, redirect, HttpResponse
 
 from io import BytesIO
 
+from EmployeeManagementSystem.settings import BASE_DIR
 from app01 import models
 from app01.modelForms.LoginModelForm import LoginModelForm
 from app01.utils.generatePillow import check_code
@@ -31,7 +34,9 @@ def logout(request):
 
 
 def img_code(request):
-    img, code_str = check_code()
+    font_path = os.path.join(BASE_DIR, 'Monaco.ttf')
+    print(font_path)
+    img, code_str = check_code(font_file=font_path)
 
     request.session['img_code'] = code_str
     request.session.set_expiry(60)

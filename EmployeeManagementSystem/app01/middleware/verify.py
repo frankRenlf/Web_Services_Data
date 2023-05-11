@@ -1,4 +1,3 @@
-import numpy
 from django.utils.deprecation import MiddlewareMixin
 from django.shortcuts import redirect
 
