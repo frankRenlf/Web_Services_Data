@@ -85,7 +85,7 @@ class OrderEncoder(json.JSONEncoder):
                     "number": obj.number,
                     "flight_id": obj.flight_id,
                     "passenger_id": obj.passenger_id,
-                    "price": obj.price,
+                    "price": str(obj.price),
                     "create_time": obj.create_time.isoformat(),
                     "status": obj.status,
                     "payment_platform": obj.payment_platform_id}
@@ -95,16 +95,16 @@ class OrderEncoder(json.JSONEncoder):
 class OrderData(generics.RetrieveUpdateDestroyAPIView):
     @csrf_exempt  # add
     def get(self, request, *args, **kwargs):
-        flight_union = models.Flight.objects.all()
-        pagination = Pagination(request, flight_union)
-        data = {'flight_union': pagination.number_list, "page_list": pagination.page_list}
+        # return render(request, "order_list.html", {"form": form})
+        data_list = models.Order.objects.all()
         fu = {}
         i = 0
         print("get")
-        for d in list(flight_union):
+        for d in list(data_list):
             fu[i] = json.dumps(d, cls=OrderEncoder)
             i += 1
         return JsonResponse({'flight_union': fu})
+
 
 
 class OrderList(generics.RetrieveUpdateDestroyAPIView):

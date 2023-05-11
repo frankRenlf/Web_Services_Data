@@ -82,6 +82,7 @@ urlpatterns = [
     # path('order/edit/<int:oid>', order.order_edit_save),
 
     path('order/', OrderList.as_view()),
+    path('order_data/', OrderData.as_view()),
     # new app knowledge
 
 ]
