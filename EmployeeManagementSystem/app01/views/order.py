@@ -96,15 +96,22 @@ class OrderData(generics.RetrieveUpdateDestroyAPIView):
     @csrf_exempt  # add
     def get(self, request, *args, **kwargs):
         # return render(request, "order_list.html", {"form": form})
-        data_list = models.Order.objects.all()
-        fu = {}
-        i = 0
-        print("get")
-        for d in list(data_list):
-            fu[i] = json.dumps(d, cls=OrderEncoder)
-            i += 1
-        return JsonResponse({'flight_union': fu})
-
+        flight_union = models.Order.objects.all()
+        data = []
+        for obj in list(flight_union):
+            data.append({"order_id": obj.id,
+                         "number": obj.number,
+                         "flight_id": obj.flight_id,
+                         "passenger_id": obj.passenger_id,
+                         "price": str(obj.price),
+                         "create_time": obj.create_time.isoformat(),
+                         "status": obj.status,
+                         "payment_platform": obj.payment_platform_id})
+        return JsonResponse({
+            "code": "200",
+            "msg": "successful",
+            "data": data
+        })
 
 
 class OrderList(generics.RetrieveUpdateDestroyAPIView):

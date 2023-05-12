@@ -69,11 +69,6 @@ class FlightData(generics.RetrieveUpdateDestroyAPIView):
     @csrf_exempt
     def get(self, request, *args, **kwargs):
         flight_union = models.Flight.objects.all()
-        cnt = flight_union.count()
-        fu = list(flight_union)
-        el = fu
-        print(type(el[0]))
-        print(el[0])
         data = []
         for obj in list(flight_union):
             data.append({"flight_id": obj.flight_id,
