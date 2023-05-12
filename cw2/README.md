@@ -1,5 +1,6 @@
 # coursework2 sc19lr
-
+you can assess in the url and it is also a guide foe this web service: 
+https://github.com/frankRenlf/Web_Services_Data/blob/main/cw2/README.md
 The domain name is sc19lr.pythonanywhere.com
 
 My web service has some safety measures, you need to use a admin account to login:
