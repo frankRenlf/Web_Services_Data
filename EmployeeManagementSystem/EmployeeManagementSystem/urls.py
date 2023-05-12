@@ -23,6 +23,30 @@ from app01.views.order import OrderList, OrderData
 from app01.views.payment import PaymentProvider
 from app01.views.aggregator import Aggregator
 urlpatterns = [
+
+    # flight
+    # path('flight/list', flight.flight_list),
+    # path('flight/modelForm/add', flight.flight_modelform_add),
+    # path('flight/<int:fid>/delete', flight.flight_delete),
+    # path('flight/<int:fid>/edit', flight.flight_modelform_edit),
+    path('flight/', FlightList.as_view()),
+    path('flight_data/', FlightData.as_view()),
+
+    # order
+    # path('order/list', order.order_list),
+    # path('order/add', order.order_add),
+    # path('order/delete', order.order_delete),
+    path('order/<int:oid>/edit', order.order_edit),
+    # path('order/edit/<int:oid>', order.order_edit_save),
+
+    path('order/', OrderList.as_view()),
+    path('order_data/', OrderData.as_view()),
+    # apis
+    path('payment/', PaymentProvider.as_view()),
+    path('aggregator/', Aggregator.as_view()),
+
+
+
     # path('admin/', admin.site.urls),
     # home
     path('', viewsHome.home),
@@ -68,24 +92,5 @@ urlpatterns = [
     path('upload/list', upload.upload_list),
     path('upload/form', upload.upload_form),
 
-    # flight
-    # path('flight/list', flight.flight_list),
-    # path('flight/modelForm/add', flight.flight_modelform_add),
-    # path('flight/<int:fid>/delete', flight.flight_delete),
-    # path('flight/<int:fid>/edit', flight.flight_modelform_edit),
-    path('flight/', FlightList.as_view()),
-    path('flight_data/', FlightData.as_view()),
 
-    # order
-    # path('order/list', order.order_list),
-    # path('order/add', order.order_add),
-    # path('order/delete', order.order_delete),
-    path('order/<int:oid>/edit', order.order_edit),
-    # path('order/edit/<int:oid>', order.order_edit_save),
-
-    path('order/', OrderList.as_view()),
-    path('order_data/', OrderData.as_view()),
-    # apis
-    path('payment/', PaymentProvider.as_view()),
-    path('aggregator/', Aggregator.as_view()),
 ]
