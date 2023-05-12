@@ -1,5 +1,5 @@
 import json
-
+from django.core import serializers
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -69,15 +69,26 @@ class FlightData(generics.RetrieveUpdateDestroyAPIView):
     @csrf_exempt
     def get(self, request, *args, **kwargs):
         flight_union = models.Flight.objects.all()
-        pagination = Pagination(request, flight_union)
-        data = {'flight_union': pagination.number_list, "page_list": pagination.page_list}
-        fu = {}
-        i = 0
-        print("get")
-        for d in list(flight_union):
-            fu[i] = json.dumps(d, cls=FlightEncoder)
-            i += 1
-        return JsonResponse({'flight_union': fu})
+        cnt = flight_union.count()
+        fu = list(flight_union)
+        el = fu
+        print(type(el[0]))
+        print(el[0])
+        data = []
+        for obj in list(flight_union):
+            data.append({"flight_id": obj.flight_id,
+                         "airline_name": obj.airline_name,
+                         "departure_time": obj.departure_time.isoformat(),
+                         "arrival_time": obj.arrival_time.isoformat(),
+                         "departure_location": obj.departure_location,
+                         "arrival_location": obj.arrival_location,
+                         "flight_price": str(obj.flight_price),
+                         "seat_number": obj.seat_number, })
+        return JsonResponse({
+            "code": "200",
+            "msg": "successful",
+            "data": data
+        })
 
 
 class FlightList(generics.RetrieveUpdateDestroyAPIView):
