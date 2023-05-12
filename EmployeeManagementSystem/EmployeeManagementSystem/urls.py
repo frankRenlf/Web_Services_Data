@@ -20,6 +20,8 @@ from app01.views import depart, user, pretty, admin, account, task, order, chart
 from app01.rest_frame import MyModelList
 from app01.views.flight import FlightList, FlightData
 from app01.views.order import OrderList, OrderData
+from app01.views.passenger import PassengerList
+from app01.views.payment_platform import PaymentPlatform
 from app01.views.payment import PaymentProvider
 from app01.views.aggregator import Aggregator
 urlpatterns = [
@@ -31,6 +33,10 @@ urlpatterns = [
     # path('flight/<int:fid>/edit', flight.flight_modelform_edit),
     path('flight/', FlightList.as_view()),
     path('flight_data/', FlightData.as_view()),
+
+
+    path('passenger/', PassengerList.as_view()),
+    path('payment_platform/', PaymentPlatform.as_view()),
 
     # order
     # path('order/list', order.order_list),
