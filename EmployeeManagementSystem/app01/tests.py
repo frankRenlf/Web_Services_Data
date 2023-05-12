@@ -100,3 +100,21 @@ class SimpleTest8(TestCase):
     def test1(self):
         response = self.client.get('/upload/list')
         self.assertEqual(response.status_code, 200)
+
+
+class SimpleTest9(TestCase):
+    def test1(self):
+        response = self.client.get('/chart/bar')
+        self.assertEqual(response.status_code, 200)
+
+
+class SimpleTest10(TestCase):
+    def test1(self):
+        response = self.client.get('/chart/pie')
+        self.assertEqual(response.status_code, 200)
+
+
+class SimpleTest11(TestCase):
+    def test1(self):
+        response = self.client.get('/chart/line')
+        self.assertEqual(response.status_code, 200)
