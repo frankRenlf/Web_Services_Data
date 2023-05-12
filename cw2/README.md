@@ -5,6 +5,10 @@ The domain name is sc19lr.pythonanywhere.com
 My web service has some safety measures, you need to use a admin account to login:
     name: admin
     password: admin
+Also an account for gzhao:
+    name: gzhao
+    password: 123
+
 And in order to avoid some attacks, an image verification code has been set up, and you can log in by filling it in.
 
 You can follow these images to use this background management system.
@@ -16,14 +20,21 @@ The admin accounts are listed there, the use of encryption means ensures that in
 
 # 2.order
 ![image](https://github.com/frankRenlf/Web_Services_Data/assets/89248496/ffd5ebd7-63e5-4ac7-b377-0352d3439e27)
+# search
+![image](https://github.com/frankRenlf/Web_Services_Data/assets/89248496/57685fe6-a65f-4e58-8ecc-ae5a1f836b9a)
+
 # These features are not  much so I use pop-up window.
+# edit
 ![image](https://github.com/frankRenlf/Web_Services_Data/assets/89248496/69e6a0af-9707-4931-b400-d1c5f8ba2aa2)
+# new
 ![image](https://github.com/frankRenlf/Web_Services_Data/assets/89248496/916e73a4-5dc2-41f1-8dc8-63624c17ca68)
 
 # 3.flight
 ![image](https://github.com/frankRenlf/Web_Services_Data/assets/89248496/21aee577-6b4a-4d50-baab-be23d21bb7af)
 # These are various features, so I use new pages to display
+# edit
 ![image](https://github.com/frankRenlf/Web_Services_Data/assets/89248496/98f4aba7-4b32-4948-9b8b-b3054409a8cd)
+# new
 ![image](https://github.com/frankRenlf/Web_Services_Data/assets/89248496/f044caf3-1fd1-42a9-842c-fb9de813df8e)
 
 # 4. additional functions
